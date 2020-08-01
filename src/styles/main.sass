@@ -1,0 +1,144 @@
+@import helper
+
+nav
+    display: flex
+    justify-content: flex-start
+    background-color: $secondary
+    color: white
+    height: 75px
+
+    #drawer
+        background-color: $primary
+        color: $secondary
+        position: absolute
+        top: 74px
+        width: 220px
+        height: 100%
+        transform: translate(-220px, 0)
+        transition: all .3s
+        display: none
+        display: flex
+        flex-direction: column
+        z-index: 999
+        &.open
+            transform: translate(0, 0)
+        a
+            padding: 1.25rem 2rem
+            transition: all .3s
+            position: relative
+            overflow: hidden
+            z-index: 1
+            &:before
+                content: ''
+                position: absolute
+                bottom: 0
+                left: 0
+                width: 0%
+                height: 100%
+                background-color: $secondary
+                transition: all .3s
+                z-index: -1
+            &:hover, &:focus
+                color: black
+                &:before
+                    width: 100% !important
+        
+    
+    #hamburger
+        color: black
+        font-weight: bolder
+        margin-left: auto
+        height: 100%
+        padding: 1.25rem 1.75rem
+        font-size: 1.5rem
+        transition: all .3s
+        &:hover, &:focus
+            background-color: darken($secondary, 7.5%)
+    
+    .title
+        height: 100%
+        width: 220px
+        padding: 1.25rem 2.5rem
+        background-color: $primary
+        color: $secondary
+        font-size: 1.5rem
+
+.hero
+    @include hw-100
+    position: relative
+    height: 480px
+
+    .overlay
+        padding: 0 2rem
+        width: 100%
+        height: 100%
+        top: 0
+        color: white
+        position: absolute
+        display: flex
+        background-color: rgba(0,0,0,0.55)
+
+        .content
+            font-size: 1.25rem
+            text-align: center
+            margin: auto
+            p
+                margin-bottom: 36px
+        
+
+    img
+        @extend .hero
+        object-fit: cover
+
+.group
+    // position: relative
+    margin-top: -1.5rem
+    // margin-bottom: 3rem
+    display: flex
+    width: 100%
+    justify-content: center
+article
+    padding: 0 1.5rem
+    text-align: center
+    margin-top: 4rem
+    .card-group
+        padding: 2rem 0
+        display: grid
+        .card
+            margin: 1.5rem 0
+            background-color: red
+            height: 360px
+
+.btn
+  padding: 1rem 2rem
+  &.big
+    padding: 2rem 4rem
+  &.full
+    @include hw-100
+  &.primary
+    color: white
+    background-color: $primary
+    transition: all .3s
+    position: relative
+    overflow: hidden
+    z-index: 1
+    &:before
+        content: ''
+        position: absolute
+        bottom: 0
+        left: 0
+        width: 0%
+        height: 100%
+        background-color: $dark
+        transition: all .3s
+        z-index: -1
+    &:hover, &:focus
+        &:before
+            width: 100% !important
+  &.dark
+    color: white
+    background-color: $dark
+    &.outline
+      color: black
+      border: 2px solid $dark
+      background-color: transparent
