@@ -1,19 +1,24 @@
 @import helper
+@import modal
 
+header
+    position: sticky
+    top: 0
+    z-index: 998
 nav
     display: flex
     justify-content: flex-start
     background-color: $secondary
     color: white
-    height: 75px
+    height: 60px
 
     #drawer
         background-color: $primary
         color: $secondary
         position: absolute
-        top: 74px
+        top: 59px
         width: 220px
-        height: 100%
+        height: 100vh
         transform: translate(-220px, 0)
         transition: all .3s
         display: none
@@ -23,6 +28,7 @@ nav
         &.open
             transform: translate(0, 0)
         a
+            font-size: 1rem
             padding: 1.25rem 2rem
             transition: all .3s
             position: relative
@@ -46,19 +52,18 @@ nav
     
     #hamburger
         color: black
-        font-weight: bolder
         margin-left: auto
         height: 100%
-        padding: 1.25rem 1.75rem
-        font-size: 1.5rem
+        padding: 1rem
+        font-size: 2rem
         transition: all .3s
         &:hover, &:focus
-            background-color: darken($secondary, 7.5%)
+            background-color: #ffffff
     
     .title
         height: 100%
         width: 220px
-        padding: 1.25rem 2.5rem
+        padding: 0.75rem 2rem
         background-color: $primary
         color: $secondary
         font-size: 1.5rem
@@ -67,6 +72,9 @@ nav
     @include hw-100
     position: relative
     height: 480px
+
+    img
+        perspective: 4px
 
     .overlay
         padding: 0 2rem
@@ -99,29 +107,63 @@ nav
     justify-content: center
 article
     padding: 0 1.5rem
-    text-align: center
     margin-top: 4rem
     .card-group
-        padding: 2rem 0
+        padding: 1rem 0
         display: grid
+        grid-template-columns: 1fr
+        height: 100%
         .card
+            background-color: #ffffff
             margin: 1.5rem 0
-            background-color: red
-            height: 360px
-
+            display: flex
+            flex-direction: column
+            .card-panel
+                padding: 1.5rem
+                h3
+                    font-size: 1.5rem
+                .city
+                    font-size: 0.9rem
+                    color: #808080
+                    text-transform: uppercase
+                .star
+                    display: flex
+                    margin-top: 0.5rem
+                    span
+                        color: #ffce2c
+                        line-height: 0
+                        margin-right: 0.5rem
+                        font-size: 1.25rem
+.btn-group
+    width: 100%
+    display: flex
 .btn
-  padding: 1rem 2rem
-  &.big
-    padding: 2rem 4rem
-  &.full
-    @include hw-100
-  &.primary
-    color: white
-    background-color: $primary
-    transition: all .3s
-    position: relative
-    overflow: hidden
-    z-index: 1
+    padding: 0.75rem 1.5rem
+    &.icon
+        padding: 0.75rem 1rem
+    &.big
+        padding: 2rem 4rem
+    &.side
+        width: auto
+        text-align: center
+    &.right
+        margin-left: auto
+    &.full
+        @include hw-100
+    &.primary
+        color: white
+        background-color: $primary
+        transition: all .3s
+        position: relative
+        overflow: hidden
+        z-index: 1
+    &.dark
+        @extend .primary
+        background-color: $dark
+        &.outline
+            color: black
+            border: 2px solid $dark
+            background-color: transparent
     &:before
         content: ''
         position: absolute
@@ -135,10 +177,9 @@ article
     &:hover, &:focus
         &:before
             width: 100% !important
-  &.dark
+
+footer
     color: white
-    background-color: $dark
-    &.outline
-      color: black
-      border: 2px solid $dark
-      background-color: transparent
+    text-align: center
+    padding: 1.5rem
+    background-color: $primary

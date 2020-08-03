@@ -1,19 +1,17 @@
-// Mixins
+
 @import "https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+@import "https://fonts.googleapis.com/icon?family=Material+Icons"
+
+// Mixins
 @mixin hw-100
   height: 100%
   width: 100%
 
+// Variables
 $primary: #e66d3e
-$secondary: #ffffff
+$secondary: #ebebeb
 $dark: #242424
 
-::-webkit-scrollbar
-  width: 8px
-::-webkit-scrollbar-track
-  background: $secondary
-::-webkit-scrollbar-thumb
-  background: $primary
 // Reset
 *
   margin: 0
@@ -24,11 +22,28 @@ $dark: #242424
   font-size: 100%
 
 html, body
+  background-color: $secondary
   @include hw-100
   &.opened
     overflow: hidden
+    
+h2
+  font-size: 1.5rem
 
 a
   color: inherit
   outline: none
   text-decoration: none
+
+//Helpers
+*
+  &:focus
+    outline: 3px solid #0000003d
+    // border: 1px solid #00000083
+.responsive
+    @include hw-100
+    height: auto
+
+.material-icons
+  vertical-align: middle !important
+  padding-bottom: 3px

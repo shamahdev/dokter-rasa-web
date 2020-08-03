@@ -17,31 +17,37 @@
                     <h1>dokter rasa</h1>
                 </a>
             </div>
-            <a id="hamburger" href="#">☰</a>
-            <div id="drawer" class="links">
-                <a tabindex="-1" href="./index.html">Home</a>
-                <a tabindex="-1" href="#">Favorite</a>
-                <a tabindex="-1" href="https://github.com/Shaddamah" rel="noreferrer" target="_blank">About Us</a>
+            <a tabindex="0" id="hamburger" aria-label="Menu" class="material-icons" href="#">menu</a>
+            <div id="drawer" tabindex="-1" class="links">
+                <a tabindex="-1" href="./index.html"><i class="material-icons">home</i> Home</a>
+                <a tabindex="-1" href="#"><i class="material-icons">bookmark</i> Bookmark</a>
+                <a tabindex="-1" href="https://github.com/Shaddamah" rel="noreferrer" target="_blank"><i
+                        class="material-icons">person</i> About Us</a>
             </div>
         </nav>
     </header>
-
+    <div class="modal">
+        <div class="modal-body">
+            <button tabindex="0" aria-label="Close modal" class="btn close-button primary side right icon"><i class="material-icons">close</i></button>
+            <div class="modal-content"></div>
+        </div>
+    </div>
     <section>
         <main>
             <div class="hero">
-                <img src="./images/heros/hero-image_2.jpg" alt="Hero image">
+                <img src="./images/heros/hero-image_2.jpg" alt="Dokter rasa Hero image">
                 <div class="overlay">
                     <div class="content">
-                        <p>Mari temukan restaran yang dapat menyembuhkan rasa laparmu sekarang juga</p>
+                        <p>Mari temukan restaran yang dapat menyembuhkan rasa laparmu sekarang juga!</p>
                     </div>
                 </div>
                 <div class="group">
-                    <a href="#" class="btn primary">Carikan saya restoran</a>
+                    <a tabindex="0" href="#" class="btn primary">Cari restoran</a>
                 </div>
             </div>
             <article>
-                <h2>Lorem ipsum dolor sit amet consectetur adipisicing.</h2>
-                <div class="card-group">
+                <h2>Restoran paling populer</h2>
+                <div class="card-group" id="card">
                     <div class="card">
                         <h3>Insinyur Martabak</h3>
                     </div>
@@ -53,9 +59,12 @@
                     </div>
                 </div>
             </article>
-
         </main>
     </section>
+
+    <footer>
+        Copyright © 2020 - Dokter Rasa Apps
+    </footer>
 
 
 </body>
