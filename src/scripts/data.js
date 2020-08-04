@@ -38,17 +38,20 @@ const renderData = element => {
             `<div class="card">
             <img class="responsive" src="${restaurant.pictureId}" alt="${restaurant.name}, ${restaurant.city}">
             <div class="card-panel">
-                <p class="city">${restaurant.city}</p>
-                <h3>${restaurant.name}</h3>
-                <div class="star">
-                    <span>${countStar(restaurant.rating)}</span>
-                    <p>${restaurant.rating}/5</p>
+                <div class="card-text">
+                    <p class="city">${restaurant.city}</p>
+                    <h3>${restaurant.name}</h3>
+                    <div class="star">
+                        <span>${countStar(restaurant.rating)}</span>
+                        <p>${restaurant.rating}/5</p>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button tabindex="0" aria-label="Add to bookmark" class="btn icon right"><i class="material-icons">bookmark_border</i></button>
+                    <button tabindex="0" data-modal="${restaurant.id}" class="trigger btn primary side">Lihat detail</a>
                 </div>
             </div>
-            <div class="btn-group">
-                <button tabindex="0" aria-label="Add to bookmark" class="btn icon right"><i class="material-icons">bookmark_border</i></button>
-                <button tabindex="0" data-modal="${restaurant.id}" class="trigger btn primary side">Lihat detail</a>
-            </div>
+            
         </div>`;
     });
 
@@ -62,6 +65,7 @@ const renderData = element => {
     });
 }
 export {
+    countStar,
     getData,
     renderData
 };

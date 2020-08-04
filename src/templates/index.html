@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <a class="skip-main" href="#main"><i class="material-icons">skip_next</i> Skip to main content</a>
     <header>
         <nav class="navbar">
             <div class="title">
@@ -28,7 +29,10 @@
     </header>
     <div class="modal">
         <div class="modal-body">
-            <button tabindex="0" aria-label="Close modal" class="btn close-button primary side right icon"><i class="material-icons">close</i></button>
+            <div class="btn-group">
+                <button tabindex="0" aria-label="Add to bookmark" class="btn bookmark-button icon side right"><i class="material-icons">bookmark_border</i></button>
+                <button tabindex="0" aria-label="Close modal" class="btn close-button primary side icon"><i class="material-icons">close</i></button>
+            </div>
             <div class="modal-content"></div>
         </div>
     </div>
@@ -45,7 +49,7 @@
                     <a tabindex="0" href="#" class="btn primary">Cari restoran</a>
                 </div>
             </div>
-            <article>
+            <article id="main">
                 <h2>Restoran paling populer</h2>
                 <div class="card-group" id="card">
                     <div class="card">

@@ -1,4 +1,4 @@
-import { getData } from "./data.js";
+import { countStar, getData } from "./data.js";
 
 const modal = document.querySelector(".modal");
 const content = modal.querySelector(".modal-content");
@@ -12,10 +12,8 @@ const initModal = _ => {
 }
 
 const trapFocus = _ => {
-    const el = document.querySelectorAll("a, button:not(.close-button)");
-    console.log(el);
+    const el = document.querySelectorAll("a, button:not(.close-button):not(.bookmark-button)");
     if(modal.classList.contains("show-modal")) {
-        console.log("Opened");
         closeButton.focus();
         el.forEach(e => {
             e.tabIndex = "-1"
@@ -29,22 +27,25 @@ const trapFocus = _ => {
 }
 
 const getModalData = id => {
-    return new Promise((resolve, reject) => {
         getData(id)
         .then(restaurant => {
             content.innerHTML= 
-            `<h3>${restaurant.name}</h3>
+            `<h3 class="modal-title">${restaurant.name}</h3>
+            <div class="star">
+                <span>${countStar(restaurant.rating)}</span>
+                <p>${restaurant.rating}/5</p>
+            </div>
             <p>${restaurant.description}</p>`;
         });
-        resolve(console.log(id));
-    });
 }
 
 const toggleModal = (id = null) => {
     if(id !== null) {
-        modal.classList.toggle("show-modal");  
+        document.querySelector("body").classList.toggle("opened2")
+        modal.classList.toggle("show-modal");
         getModalData(id);
     } else {
+        document.querySelector("body").classList.remove("opened2")
         modal.classList.remove("show-modal");
     }
     trapFocus();

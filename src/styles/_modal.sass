@@ -8,23 +8,33 @@
     height: 100%
     background-color: rgba(0, 0, 0, 0.5)
     visibility: hidden
-    transform: scale(1.1)
     transition: all .3s
-    .modal-body 
+    .modal-body
+        height: 480px
+        transition: all .3s
         display: flex
         flex-direction: column
         position: absolute
-        top: 50%
+        bottom: 0%
         left: 50%
-        transform: translate(-50%, -50%)
+        transform: translate(-50%, 100%)
         background-color: white
-        width: 24rem
+        width: 100%
+        @include media-in("laptop")
+            width: 50%
         .modal-content
-            padding: 1.5rem
+            overflow: auto
+            padding: 2rem
+            .modal-title
+                font-size: 1.5rem
             
     &.show-modal 
         opacity: 1
         visibility: visible
-        transform: scale(1.0)
         transition: all .3s
+        .modal-body
+            transition: all .3s
+            transform: translate(-50%, 0%)
+            @include media-in("laptop")
+                transform: translate(-50%, -50%)
     

@@ -2,15 +2,23 @@
 @import "https://fonts.googleapis.com/css2?family=Poppins&display=swap"
 @import "https://fonts.googleapis.com/icon?family=Material+Icons"
 
-// Mixins
-@mixin hw-100
-  height: 100%
-  width: 100%
-
 // Variables
 $primary: #e66d3e
 $secondary: #ebebeb
 $dark: #242424
+
+$breakpoint: ('phone': 320px, 'tablet': 720px, 'laptop': 1024px )
+
+// Mixins
+@mixin media-in($point) 
+  @each $device, $size in $breakpoint
+    @if $point == $device
+      @media (min-width: $size)
+        @content
+
+@mixin hw-100
+  height: 100%
+  width: 100%
 
 // Reset
 *
@@ -22,9 +30,10 @@ $dark: #242424
   font-size: 100%
 
 html, body
+  scroll-behavior: smooth
   background-color: $secondary
   @include hw-100
-  &.opened
+  &.opened, &.opened2
     overflow: hidden
     
 h2
@@ -35,6 +44,9 @@ a
   outline: none
   text-decoration: none
 
+button
+  &:hover
+    cursor: pointer
 //Helpers
 *
   &:focus
