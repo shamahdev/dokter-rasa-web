@@ -1,0 +1,33 @@
+.card-group
+        padding: 2.5rem 0
+        display: grid
+        grid-template-columns: 1fr
+        column-gap: 2.5rem
+        row-gap: 2.5rem
+        height: 100%
+        @include media-in(tablet)
+            grid-template-columns: 1fr 1fr
+        .card
+            background-color: #ffffff
+            @include flex(column)
+            @include media-in(desktop)
+                flex-direction: row
+            img
+                object-fit: cover
+                height: 320px
+                @include media-in(desktop)
+                    height: auto
+                    width: 220px
+            .card-panel
+                @include full-size
+                @include flex(column)
+                align-content: flex-end
+                .card-text
+                    flex: 1 0 auto
+                    padding: 1.5rem
+                    h3
+                        font-size: 1.5rem
+                    .city
+                        font-size: 0.9rem
+                        color: map-get($colors, "primary")
+                        text-transform: uppercase

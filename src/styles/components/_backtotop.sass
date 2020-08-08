@@ -1,0 +1,14 @@
+.back-to-top
+  position: fixed
+  bottom: 0
+  right: 0
+  transition: 0.3s all
+  transform: translate(0, 100%)
+  z-index: 1002
+  @include media-in(desktop)
+    right: 2rem
+  i
+    padding: 1.5rem
+  &.show-to-top
+    transform: translate(0, 0%)
+

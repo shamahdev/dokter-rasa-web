@@ -1,0 +1,13 @@
+@mixin media-in($point) 
+  @each $device, $size in $breakpoint
+    @if $point == $device
+      @media (min-width: $size)
+        @content
+
+@mixin flex($dir: auto)
+  display: flex
+  flex-direction: $dir
+
+@mixin full-size
+  height: 100%
+  width: 100%

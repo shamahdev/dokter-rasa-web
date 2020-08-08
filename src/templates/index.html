@@ -6,67 +6,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="Description" content="Temukan Restoran Favoritmu">
+    <link rel="apple-touch-icon" href="./images/logo.png">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
     <title>Dokter Rasa</title>
 </head>
 
 <body>
     <a class="skip-main" href="#main"><i class="material-icons">skip_next</i> Skip to main content</a>
-    <header>
-        <nav class="navbar">
+
+    <header id="top">
+        <nav class="navbar" role='navigation'>
             <div class="title">
-                <a href="./index.html" tabindex="-1">
+                <a tabindex="-1" href="./index.html">
                     <h1>dokter rasa</h1>
                 </a>
             </div>
             <a tabindex="0" id="hamburger" aria-label="Menu" class="material-icons" href="#">menu</a>
-            <div id="drawer" tabindex="-1" class="links">
-                <a tabindex="-1" href="./index.html"><i class="material-icons">home</i> Home</a>
-                <a tabindex="-1" href="#"><i class="material-icons">bookmark</i> Bookmark</a>
-                <a tabindex="-1" href="https://github.com/Shaddamah" rel="noreferrer" target="_blank"><i
-                        class="material-icons">person</i> About Us</a>
-            </div>
+            <ul id="drawer" class="links">
+                <li><a tabindex="0" href="./index.html"><i class="material-icons">home</i> Home</a></li>
+                <li><a tabindex="0" href="#"><i class="material-icons">bookmark</i> Bookmark</a></li>
+                <li><a tabindex="0" href="https://github.com/Shaddamah" rel="noreferrer" target="_blank"><i class="material-icons">person</i> About Us</a></li>
+            </ul>
         </nav>
     </header>
-    <div class="modal">
+
+    <div class="modal" role="dialog" aria-hidden="true">
         <div class="modal-body">
             <div class="btn-group">
-                <button tabindex="0" aria-label="Add to bookmark" class="btn bookmark-button icon side right"><i class="material-icons">bookmark_border</i></button>
-                <button tabindex="0" aria-label="Close modal" class="btn close-button primary side icon"><i class="material-icons">close</i></button>
+                <button tabindex="0" aria-label="Add to bookmark" class="btn bookmark-button icon side right"><i
+                        class="material-icons">bookmark_border</i></button>
+                <button tabindex="0" aria-label="Close modal" class="btn close-button primary side icon"><i
+                        class="material-icons">close</i></button>
             </div>
             <div class="modal-content"></div>
         </div>
     </div>
+
     <section>
-        <main>
+        <main role="main">
             <div class="hero">
                 <img src="./images/heros/hero-image_2.jpg" alt="Dokter rasa Hero image">
                 <div class="overlay">
                     <div class="content">
-                        <p>Mari temukan restaran yang dapat menyembuhkan rasa laparmu sekarang juga!</p>
+                        <p class="title">dokter rasa</p>
+                        <p>Mari temukan restoran yang dapat menyembuhkan rasa laparmu sekarang juga!</p>
                     </div>
                 </div>
                 <div class="group">
-                    <a tabindex="0" href="#" class="btn primary">Cari restoran</a>
+                    <a tabindex="0" href="#card" class="btn primary">Cari restoran</a>
                 </div>
             </div>
             <article id="main">
-                <h2>Restoran paling populer</h2>
+                <h2 class="center">Kenapa pilih kami</h2>
+                <div class="showcase">
+                    <div class="icon-group">
+                        <i class="material-icons">bookmark</i>
+                        <p>Simpan Restoran favoritmu untuk dikunjungi nanti</p>
+                    </div>
+                    <div class="icon-group">
+                        <i class="material-icons">star</i>
+                        <p>Cari tahu sebagus apa resoran dengan fitur rating dari pengunjung</p>
+                    </div>
+                    <div class="icon-group">
+                        <i class="material-icons">local_dining</i>
+                        <p>Pilih restoran dengan menu yang cocok untuk kamu dan keluarga</p>
+                    </div>
+                </div>
+                <h2 class="center">Restoran paling populer</h2>
                 <div class="card-group" id="card">
-                    <div class="card">
-                        <h3>Insinyur Martabak</h3>
-                    </div>
-                    <div class="card">
-                        <h3>Insinyur Martabak</h3>
-                    </div>
-                    <div class="card">
-                        <h3>Insinyur Martabak</h3>
-                    </div>
                 </div>
             </article>
         </main>
     </section>
 
-    <footer>
+    <div class="back-to-top">
+        <a href="#top" class="btn dark icon material-icons" aria-label="Scroll to Top">arrow_upward</a>
+    </div>
+
+    <footer role="contentinfo">
         Copyright © 2020 - Dokter Rasa Apps
     </footer>
 

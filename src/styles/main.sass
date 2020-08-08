@@ -1,75 +1,22 @@
-@import helper
-@import modal
-
-header
-    position: sticky
-    top: 0
-    z-index: 998
-nav
-    display: flex
-    justify-content: flex-start
-    background-color: $secondary
-    color: white
-    height: 60px
-
-    #drawer
-        background-color: $primary
-        color: $secondary
-        position: absolute
-        top: 59px
-        width: 220px
-        height: 100vh
-        transform: translate(-220px, 0)
-        transition: all .3s
-        display: none
-        display: flex
-        flex-direction: column
-        z-index: 999
-        &.open
-            transform: translate(0, 0)
-        a
-            font-size: 1rem
-            padding: 1.25rem 2rem
-            transition: all .3s
-            position: relative
-            overflow: hidden
-            z-index: 1
-            &:before
-                content: ''
-                position: absolute
-                bottom: 0
-                left: 0
-                width: 0%
-                height: 100%
-                background-color: $secondary
-                transition: all .3s
-                z-index: -1
-            &:hover, &:focus
-                color: black
-                &:before
-                    width: 100% !important
-        
+// Fonts
+@import "https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+@import "https://fonts.googleapis.com/icon?family=Material+Icons"
     
-    #hamburger
-        color: black
-        margin-left: auto
-        height: 100%
-        padding: 1rem
-        font-size: 2rem
-        transition: all .3s
-        &:hover, &:focus
-            background-color: #ffffff
-    
-    .title
-        height: 100%
-        width: 220px
-        padding: 0.75rem 2rem
-        background-color: $primary
-        color: $secondary
-        font-size: 1.5rem
+// Core
+@import core/variables
+@import core/mixins
+@import core/helper
+
+// Components
+@import components/modal
+@import components/toast
+@import components/navbar
+@import components/cards
+@import components/buttons
+@import components/backtotop
 
 .hero
-    @include hw-100
+    @include full-size
     position: relative
     height: 480px
 
@@ -83,15 +30,16 @@ nav
         top: 0
         color: white
         position: absolute
-        display: flex
+        @include flex
         background-color: rgba(0,0,0,0.55)
 
         .content
             font-size: 1.25rem
             text-align: center
             margin: auto
-            p
-                margin-bottom: 36px
+            .title
+                font-size: 2rem
+                
         
 
     img
@@ -99,124 +47,66 @@ nav
         object-fit: cover
 
 .group
-    // position: relative
     margin-top: -1.5rem
-    // margin-bottom: 3rem
     display: flex
     width: 100%
     justify-content: center
 article
     padding: 0 1.5rem
     margin-top: 4rem
-    @include media-in("laptop")
-        // padding: 0 5rem
-    .card-group
-        padding: 2.5rem 0
-        display: grid
-        grid-template-columns: 1fr
-        column-gap: 2.5rem
-        row-gap: 2.5rem
-        height: 100%
-        @include media-in("tablet")
-            grid-template-columns: 1fr 1fr
-        .card
-            background-color: #ffffff
-            display: flex
-            flex-direction: column
-            @include media-in("laptop")
-                flex-direction: row
-            img
-                object-fit: cover
-                height: 320px
-                @include media-in("laptop")
-                    height: auto
-                    width: 220px
-            .card-panel
-                width: 100%
-                height: 100%
-                display: flex
-                flex-direction: column
-                align-content: flex-end
-                .card-text
-                    flex: 1 0 auto
-                    padding: 1.5rem
-                    h3
-                        font-size: 1.5rem
-                    .city
-                        font-size: 0.9rem
-                        color: #808080
-                        text-transform: uppercase
+    @include media-in(desktop)
+        margin: 0 auto
+        margin-top: 4rem
+        max-width: 1280px
+
 .star
-    display: flex
-    flex-direction: row
+    @include flex(row)
     margin: 0.5rem 0 1.5rem 0 
     span
-        color: #ffce2c
+        color: #ffc400
         line-height: 0
         margin-right: 0.5rem
         font-size: 1.25rem
-.btn-group
-    width: 100%
-    display: flex
-.btn
-    transition: all .3s
-    position: relative
-    overflow: hidden
-    z-index: 1
-    padding: 0.75rem 1.5rem
-    &.icon
-        padding: 0.75rem 1rem
-    &.big
-        padding: 2rem 4rem
-    &.side
-        width: auto
-        text-align: center
-    &.right
-        margin-left: auto
-    &.full
-        @include hw-100
-    &.primary
-        color: white
-        background-color: $primary
-    &.dark
-        @extend .primary
-        background-color: $dark
-        &.outline
-            color: black
-            border: 2px solid $dark
-            background-color: transparent
-    &:before
-        content: ''
-        position: absolute
-        bottom: 0
-        left: 0
-        width: 0%
-        height: 100%
-        background-color: $dark
-        transition: all .3s
-        z-index: -1
-    &:hover, &:focus
-        color: white
-        &:before
-            width: 100% !important
 
 footer
-    color: white
+    color: #ffffff
     text-align: center
     padding: 1.5rem
-    background-color: $primary
+    background-color: map-get($colors, "primary")
 
 .skip-main 
-    background-color: $dark
-    color: white
+    background-color: map-get($colors, "dark")
+    color: #ffffff
     position: fixed
-    top:auto
     width: 100%
     padding: 0.75rem 1.5rem
     z-index:1001
     top: 0%
     transform: translateY(-100%)
     transition: all .3s
+    @include media-in("tablet")
+        width: auto
     &:focus, &:active
         transition: all .3s
         transform: translateY(0%)
+
+.guide
+    color: map-get($colors, "primary")
+    font-size: 0.9rem
+    text-transform: capitalize
+    margin: 0.5rem 0
+
+.showcase
+    padding: 2.5rem 0
+    @include flex(column)
+    text-align: center
+    @include media-in(tablet)
+        flex-direction: row
+    .icon-group
+        width: 100%
+        padding: 2rem
+        @include flex(column)
+        i
+            color: map-get($colors, "primary")
+            font-size: 5rem
+            margin-bottom: 0.5rem
