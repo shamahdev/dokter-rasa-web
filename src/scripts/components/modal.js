@@ -104,18 +104,3 @@ const Modal = {
 
 }
 export default Modal;
-
-// const trapFocus = _ => {
-//     const el = document.querySelectorAll("li a, a, button:not(.close-button):not(.bookmark-button)");
-//     if (modal.classList.contains("show-modal")) {
-//         document.addEventListener("keyup", accessiblityKey);
-//         closeButton.focus();
-//         el.forEach(e => {
-//             e.tabIndex = "-1"
-//         });
-//     } else {
-//         el.forEach(e => {
-//             e.tabIndex = "0"
-//         });
-//     }
-// }

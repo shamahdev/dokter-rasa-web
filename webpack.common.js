@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 
 module.exports = {
@@ -34,6 +36,29 @@ module.exports = {
           to: path.resolve(__dirname, 'dist/'),
         },
       ],
+    }),
+    new WebpackPwaManifest({
+      name: 'Dokter Rasa',
+      short_name: 'Dokter Rasa',
+      description: 'Temukan Restoran untuk obat rasa laparmu!',
+      theme_color: '#C52C26',
+      background_color: '#C52C26',
+      start_url: '/index.html',
+      display: 'standalone',
+      crossorigin: 'use-credentials', //can be null, use-credentials or anonymous
+      ios: true,
+      icons: [
+        {
+          src: path.resolve('src/public/images/logo.png'),
+          sizes: [96, 128, 192, 256, 384, 512],
+          type: 'image/png',
+          purpose: 'any maskable',
+        },
+      ]
+    }),
+    new WorkboxPlugin.InjectManifest({
+      swSrc: './src/scripts/sw.js',
+      swDest: 'sw.js',
     }),
   ],
 };

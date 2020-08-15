@@ -1,9 +1,7 @@
 import 'regenerator-runtime'; /* for async await transpile */
 import 'styles/main.sass';
-// import { getData, renderData } from "./data.js";
-// import { initModal } from "./components/modal.js";
-
 import App from "@/views/app.js";
+import swRegister from "@/utils/sw-register";
 
 const app = new App({
     hamburger: document.querySelector('#hamburger'),
@@ -17,16 +15,9 @@ window.addEventListener('hashchange', () => {
    
 window.addEventListener('load', () => {
     app.loadPage();
+    swRegister();
 });
 // const main = _ => {
-
-//     const card = document.getElementById("card");
-//     getData().then(data => {
-//         renderData(card, data);  
-//     });
-
-//     navbar();
-//     initModal();
 
 //     window.onscroll = _ => {
 //         const toTop = document.querySelector(".back-to-top");
