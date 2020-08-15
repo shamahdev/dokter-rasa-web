@@ -1,16 +1,19 @@
-.card-group
+#card-group
         padding: 2.5rem 0
-        display: grid
-        grid-template-columns: 1fr
-        column-gap: 2.5rem
-        row-gap: 2.5rem
         height: 100%
+        @include flex(column)
+        flex-wrap: wrap
         @include media-in(tablet)
-            grid-template-columns: 1fr 1fr
+            flex-direction: row
         .card
+            margin: 1.5rem
             background-color: #ffffff
             @include flex(column)
+            @include media-in(tablet)
+                min-width: 280px
+                flex: 1 1 0
             @include media-in(desktop)
+                min-width: auto
                 flex-direction: row
             img
                 object-fit: cover

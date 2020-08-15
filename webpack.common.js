@@ -4,6 +4,12 @@ const path = require('path');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/scripts/index.js'),
+  resolve: {
+    alias: {
+      scripts: path.resolve(__dirname, "src/scripts/"),
+      styles: path.resolve(__dirname, "src/styles/")
+    }
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',

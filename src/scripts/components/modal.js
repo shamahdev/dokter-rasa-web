@@ -1,4 +1,4 @@
-import { getStars, getData } from "./../data.js";
+import { getStars, getData } from "../data/data.js";
 import Toast from "./toast.js";
 
 const body = document.querySelector("body");

@@ -17,7 +17,7 @@ nav
         margin-block-end: 0
         top: 59px
         width: 220px
-        height: 100vh
+        height: 0vh
         transform: translate(-220px, 0)
         transition: all .3s
         @include flex(column)
@@ -32,6 +32,7 @@ nav
             flex-direction: row
             position: static
         &.open
+            height: 100vh
             transform: translate(0, 0)
         li
             @include flex

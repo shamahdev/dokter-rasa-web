@@ -1,28 +1,41 @@
 import 'regenerator-runtime'; /* for async await transpile */
-import '../styles/main.sass';
+import 'styles/main.sass';
+// import { getData, renderData } from "./data.js";
+// import { initModal } from "./components/modal.js";
 
-import { getData, renderData } from "./data.js";
-import { initModal } from "./components/modal.js";
-import navbar from "./components/navbar.js";
+import App from "scripts/views/app.js";
 
-const main = _ => {
+const app = new App({
+    hamburger: document.querySelector('#hamburger'),
+    drawer: document.querySelector('#drawer'),
+    content: document.querySelector('main'),
+});
 
-    const card = document.getElementById("card");
-    getData().then(data => {
-        renderData(card, data);  
-    });
+window.addEventListener('hashchange', () => {
+    app.loadPage();
+  });
+   
+window.addEventListener('load', () => {
+    app.loadPage();
+});
+// const main = _ => {
 
-    navbar();
-    initModal();
+//     const card = document.getElementById("card");
+//     getData().then(data => {
+//         renderData(card, data);  
+//     });
 
-    window.onscroll = _ => {
-        const toTop = document.querySelector(".back-to-top");
-        if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-            toTop.classList.add("show-to-top");
-        } else {
-            toTop.classList.remove("show-to-top");
-        }
-    };
-}
+//     navbar();
+//     initModal();
 
-document.addEventListener("DOMContentLoaded", main);
+//     window.onscroll = _ => {
+//         const toTop = document.querySelector(".back-to-top");
+//         if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+//             toTop.classList.add("show-to-top");
+//         } else {
+//             toTop.classList.remove("show-to-top");
+//         }
+//     };
+// }
+
+// document.addEventListener("DOMContentLoaded", main);
