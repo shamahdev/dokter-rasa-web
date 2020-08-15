@@ -1,5 +1,6 @@
-import RestaurantDataSource from "scripts/data/data";
-import Card from "scripts/components/card";
+import RestaurantDataSource from "@/data/data";
+import Card from "@/components/card";
+import Modal from "@/components/modal";
 
 const Home = {
     async render() {
@@ -42,12 +43,15 @@ const Home = {
    
     async afterRender() {
       const restaurantList = await RestaurantDataSource.list();
+
       const cardGroup = document.getElementById("card-group")
       let restaurantHTML = ``;
       restaurantList.forEach(restaurant => {
         restaurantHTML += Card.render(restaurant);
       });
+
       cardGroup.innerHTML = restaurantHTML;
+      Card.createEvent();
     },
   };
    

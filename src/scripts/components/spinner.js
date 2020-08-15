@@ -11,5 +11,4 @@ class Spinner extends HTMLElement {
         `;
     }
 }
-
 customElements.define("loading-spinner", Spinner);

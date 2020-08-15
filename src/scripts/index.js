@@ -3,7 +3,7 @@ import 'styles/main.sass';
 // import { getData, renderData } from "./data.js";
 // import { initModal } from "./components/modal.js";
 
-import App from "scripts/views/app.js";
+import App from "@/views/app.js";
 
 const app = new App({
     hamburger: document.querySelector('#hamburger'),

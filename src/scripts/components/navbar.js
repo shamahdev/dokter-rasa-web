@@ -9,11 +9,11 @@ const Navbar = {
     },
    
     _toggleDrawer(event, drawer, hamburger) {
-        const notDesktopSize = window.matchMedia("(max-width: 719px)");
-        const body = document.querySelector("body");
         event.stopPropagation();
+        const maxDrawerSize = window.matchMedia("(max-width: 719px)");
+        const body = document.querySelector("body");
 
-        if (notDesktopSize.matches) {
+        if (maxDrawerSize.matches) {
                 drawer.classList.toggle("open");
                 body.classList.toggle("opened");
 
@@ -22,11 +22,11 @@ const Navbar = {
     },
 
     _closeDrawer(event, drawer, hamburger) {
-        const notDesktopSize = window.matchMedia("(max-width: 719px)");
-        const body = document.querySelector("body");
         event.stopPropagation();
+        const maxDrawerSize = window.matchMedia("(max-width: 719px)");
+        const body = document.querySelector("body");
 
-          if (notDesktopSize.matches) {
+          if (maxDrawerSize.matches) {
                 drawer.classList.remove("open");
                 body.classList.remove("opened");
 
@@ -34,15 +34,15 @@ const Navbar = {
           }
       },
     _drawerEvent(event, drawer, hamburger) {
-        const navigations = drawer.querySelectorAll("a");
         event.stopPropagation();
+        const navigations = drawer.querySelectorAll("a");
 
         if (drawer.classList.contains("open")) {
-            document.addEventListener("keydown", e => {
-                if (e.keyCode === 27) {
+            document.addEventListener("keydown", event => {
+                if (event.keyCode === 27) {
                     this._closeDrawer(event, drawer, hamburger);
                 }
-                if (e.keyCode === 9) {
+                if (event.keyCode === 9 && !event.shiftKey) {
                     if (navigations[navigations.length - 1].matches(':focus')){
                         this._closeDrawer(event, drawer, hamburger);
                     }

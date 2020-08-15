@@ -1,8 +1,9 @@
-import Navbar from 'scripts/components/navbar';
-import UrlParser from 'scripts/routes/urlparser';
-import routes from 'scripts/routes/routes';
+import Navbar from '@/components/navbar';
+import "@/components/spinner"
 
-import "scripts/components/spinner"
+import UrlParser from '@/routes/urlparser';
+import routes from '@/routes/routes';
+
  
 class App {
   constructor({ hamburger, drawer, content }) {

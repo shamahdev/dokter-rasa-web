@@ -1,4 +1,5 @@
-import CONFIG from "scripts/global/config";
+import CONFIG from "@/global/config";
+import Modal from "@/components/modal";
 
 const Card = {
     render(restaurant) {
@@ -34,8 +35,22 @@ const Card = {
         return stars;
     },
    
-    cardEvent() {
-      
+    createEvent() {
+        // const bookmarkButton = document.querySelectorAll("button[data-bookmark]");
+        // bookmarkButton.forEach(element => {
+        //     element.addEventListener("click", event => {
+        //         event.stopPropagation();
+        //         Modal.init(element.dataset.bookmark);
+        //     });
+        // });
+        const detailButton = document.querySelectorAll("button[data-modal]");
+        detailButton.forEach(element => {
+            element.addEventListener("click", event => {
+                console.log("Hi");
+                event.stopPropagation();
+                Modal.init(element.dataset.modal);
+            });
+        });
     },
   };
    

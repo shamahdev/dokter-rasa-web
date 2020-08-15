@@ -11,3 +11,11 @@
 @mixin full-size
   height: 100%
   width: 100%
+
+@mixin teardrop($reverse: false, $size: 2.5rem)
+  @if ($reverse == true)
+    border-radius: 0
+    border-bottom-right-radius: $size
+  @else
+    border-radius: $size
+    border-bottom-right-radius: 0

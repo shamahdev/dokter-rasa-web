@@ -6,7 +6,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'src/scripts/index.js'),
   resolve: {
     alias: {
-      scripts: path.resolve(__dirname, "src/scripts/"),
+      '@': path.resolve(__dirname, "src/scripts/"),
       styles: path.resolve(__dirname, "src/styles/")
     }
   },

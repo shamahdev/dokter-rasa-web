@@ -3,13 +3,14 @@ header
     top: 0
     z-index: 998
 nav
-    @include flex
+    @include flex(row)
     justify-content: flex-start
     background-color: #ffffff
     color: #ffffff
     height: 60px
 
     #drawer
+        @include teardrop(true)
         background-color: map-get($colors, "primary")
         color: #ffffff
         position: absolute
@@ -77,6 +78,7 @@ nav
             display: none
     
     .title
+        @include teardrop(true, 2rem)
         height: 100%
         width: 220px
         padding: 0.75rem 2rem

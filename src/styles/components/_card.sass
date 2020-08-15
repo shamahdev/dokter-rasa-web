@@ -9,6 +9,7 @@
             margin: 1.5rem
             background-color: #ffffff
             @include flex(column)
+            @include teardrop
             @include media-in(tablet)
                 min-width: 280px
                 flex: 1 1 0
@@ -18,6 +19,7 @@
             img
                 object-fit: cover
                 height: 320px
+                @include teardrop
                 @include media-in(desktop)
                     height: auto
                     width: 220px
