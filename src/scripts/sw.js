@@ -9,9 +9,7 @@ skipWaiting();
 clientsClaim();
 
 setCacheNameDetails(CONFIG.CACHE_NAME);
-precacheAndRoute(
-    {url: '/', revision: 1},
-    self.__WB_MANIFEST, {
+precacheAndRoute(self.__WB_MANIFEST, {
     ignoreUrlParametersMatching: [/.*/]
 });
 

@@ -1,5 +1,6 @@
 import CONFIG from "@/global/config";
 import Modal from "@/components/modal";
+import BookmarkBtnInitiator from "@/utils/bookmark-button-initiator";
 
 const Card = {
     render(restaurant) {
@@ -36,19 +37,16 @@ const Card = {
     },
    
     createEvent() {
-        // const bookmarkButton = document.querySelectorAll("button[data-bookmark]");
-        // bookmarkButton.forEach(element => {
-        //     element.addEventListener("click", event => {
-        //         event.stopPropagation();
-        //         Modal.init(element.dataset.bookmark);
-        //     });
-        // });
+        const bookmarkButton = document.querySelectorAll("button[data-bookmark]");
+        bookmarkButton.forEach(async(element) => {
+            await BookmarkBtnInitiator.init(element);
+        });
         const detailButton = document.querySelectorAll("button[data-modal]");
         detailButton.forEach(element => {
-            element.addEventListener("click", event => {
-                console.log("Hi");
+            element.addEventListener("click", async(event) => {
                 event.stopPropagation();
-                Modal.init(element.dataset.modal);
+                await Modal.init(element.dataset.modal);
+                console.log("Modal initialized.");
             });
         });
     },

@@ -51,7 +51,7 @@ const Home = {
       });
 
       cardGroup.innerHTML = restaurantHTML;
-      Card.createEvent();
+      await Card.createEvent();
     },
   };
    

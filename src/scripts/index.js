@@ -17,6 +17,7 @@ window.addEventListener('load', () => {
     app.loadPage();
     swRegister();
 });
+
 // const main = _ => {
 
 //     window.onscroll = _ => {

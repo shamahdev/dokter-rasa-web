@@ -1,17 +1,18 @@
 import RestaurantDataSource from "@/data/data";
+import BookmarkBtnInitiator from "@/utils/bookmark-button-initiator";
 
 const Modal = {
     async init(restaurantId) {
         const body = document.querySelector("body");
         const restaurantDetail = await RestaurantDataSource.detail(restaurantId);
-        body.appendChild(await this._render(restaurantDetail.restaurant));
+        body.appendChild(this._render(restaurantDetail.restaurant));
 
         setTimeout(() => {
-            this._createEvent(restaurantDetail.restaurant.id);
+            this._afterRender(restaurantDetail.restaurant);
         }, 100);
     },
 
-    async _render(restaurant) {
+    _render(restaurant) {
         const modalHtml = document.createElement("div");
         modalHtml.classList.add('modal');
         modalHtml.id = restaurant.id;
@@ -32,11 +33,38 @@ const Modal = {
                         <span>${this._getStars(restaurant.rating)}</span>
                         <p>${restaurant.rating}/5</p>
                     </div>
-                    <p>${restaurant.description}</p
+                    <small class="guide">${restaurant.address}, ${restaurant.city}</small>
+                    <p class="modal-description">${restaurant.description.substring(0,125)}</p>
+                    <h3 class="modal-title">Review Pengunjung</h3>
+                    <div class="modal-review">
+                        <loading-spinner/>
+                    </div>
+                </div>
+                <div class="modal-form">
+                    <h3 class="modal-title">Berikan Tanggapan</h3>
+                    <form id="review-form">
+                    <div class="form-input">
+                        <input type="text" id="name" name="name" placeholder="Nama" required>
+                        <textarea type="text" rows="1" id="review" name="review" placeholder="Tanggapan anda" required></textarea>
+                    </div>
+                        <button class="btn dark full" type="submit"><i class="material-icons" aria-hidden="true">send</i></button>
+                    </form>
                 </div>
             </div>
         `
         return modalHtml;
+    },
+
+    async _renderReview(reviewContent, reviews) {
+        reviewContent.innerHTML = ``;
+        reviews.forEach(review => {
+            reviewContent.innerHTML += `
+            <div class="review-container" id="123">
+                <p class="name">${review.name}</p>
+                <p class="review">${review.review}</p>
+            </div>
+            `
+        });
     },
 
     _getStars(rating){
@@ -51,26 +79,48 @@ const Modal = {
         return stars;
     },
 
-    _createEvent(modalId) {
-        const modal = document.getElementById(modalId);
+    async _afterRender(restaurant) {
+        const modal = document.getElementById(restaurant.id);
+        const reviewContent = modal.querySelector('.modal-review');
+        const reviewForm = modal.querySelector("form#review-form");
         const closeButton = modal.querySelector(".close-button");
-        const bookmarkButton = modal.querySelector(".bookmark-button");
+        const bookmarkButton = modal.querySelector(`button[data-bookmark="${modal.id}"]`);
         const notModalButtons = document.querySelectorAll("li a, a, button:not(.close-button):not(.bookmark-button)");
         
+        await this._renderReview(reviewContent, restaurant.consumerReviews);
+
+        await BookmarkBtnInitiator.init(bookmarkButton);
+
+        reviewForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const nameInput = reviewForm.querySelector("input#name");
+            const reviewInput = reviewForm.querySelector("textarea#review");
+            const reviewData = {
+                id: modal.id,
+                name: nameInput.value,
+                review: reviewInput.value
+            };
+
+            const updatedReview = await RestaurantDataSource.review(reviewData);
+            reviewForm.reset();
+            this._renderReview(reviewContent, updatedReview.customerReviews);
+        })
+
         this._toggleModal(modal, notModalButtons);
         closeButton.focus();
 
         document.addEventListener("keyup", event => {
             event.stopPropagation();
-            this._keyEvent(event, modal, notModalButtons);
+            this._keyEvent(event, modal, notModalButtons, bookmarkButton);
         });
         closeButton.addEventListener("click", event => {
             event.stopPropagation();
-            this._closeModal(modal, notModalButtons);
+            this._closeModal(modal, notModalButtons, bookmarkButton);
         })
     },
 
-    _keyEvent(event, modal, notModalButtons) {
+    _keyEvent(event, modal, notModalButtons, bookmarkButton) {
         if (event.keyCode === 27) {
             this._closeModal(modal, notModalButtons);
         } else if (event.keyCode === 70) {

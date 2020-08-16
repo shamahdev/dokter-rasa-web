@@ -28,6 +28,11 @@ class App {
     this._content.innerHTML = await page.render();
     await page.afterRender();
   }
+  async refreshPage() {
+    const url = UrlParser.parseActiveUrlWithCombiner();
+    const page = routes[url];
+    await page.afterRender();
+  }
 }
  
 export default App;
