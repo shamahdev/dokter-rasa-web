@@ -1,21 +1,21 @@
 import Navbar from '@/components/navbar';
-import "@/components/spinner"
+import '@/components/spinner';
 
 import UrlParser from '@/routes/urlparser';
 import routes from '@/routes/routes';
 
- 
+
 class App {
-  constructor({ hamburger, drawer, content }) {
+  constructor({hamburger, drawer, content}) {
     this._hamburger = hamburger;
     this._drawer = drawer;
     this._content = content;
- 
+
     this._initialAppShell();
   }
- 
+
   _initialAppShell() {
-    console.log("Berhasil.");
+    console.log('Berhasil.');
     Navbar.init({
       hamburger: this._hamburger,
       drawer: this._drawer,
@@ -34,5 +34,5 @@ class App {
     await page.afterRender();
   }
 }
- 
+
 export default App;

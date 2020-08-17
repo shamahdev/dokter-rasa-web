@@ -1,10 +1,9 @@
-import RestaurantBookmark from "@/data/restaurant-idb";
-import Card from "@/components/card";
-import Modal from "@/components/modal";
+import RestaurantBookmark from '@/data/restaurant-idb';
+import Card from '@/components/card';
 
 const Bookmark = {
-    async render() {
-      return `
+  async render() {
+    return `
         <article id="main">
             <h2 class="center">Bookmark</h2>
             <div id="card-group">
@@ -12,20 +11,22 @@ const Bookmark = {
             </div>
         </article>
       `;
-    },
-   
-    async afterRender() {
-      const restaurantList = await RestaurantBookmark.getAllBookmark();
+  },
 
-      const cardGroup = document.getElementById("card-group")
-      let restaurantHTML = ``;
-      restaurantList.forEach(restaurant => {
-        restaurantHTML += Card.render(restaurant);
-      });
+  async afterRender() {
+    const restaurantList = await RestaurantBookmark.getAllBookmark();
+    console.log(restaurantList);
 
-      cardGroup.innerHTML = restaurantHTML;
-      await Card.createEvent();
-    },
-  };
-   
-  export default Bookmark;
+    const cardGroup = document.getElementById('card-group');
+    let restaurantHTML = ``;
+    restaurantList.forEach((restaurant) => {
+      restaurantHTML += Card.render(restaurant);
+    });
+
+    cardGroup.innerHTML = restaurantHTML;
+    // Add 'is-on-bookmark' dataset = true
+    await Card.createEvent(true);
+  },
+};
+
+export default Bookmark;

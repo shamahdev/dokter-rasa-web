@@ -33,8 +33,7 @@ button
 //Helpers
 *
   &:focus
-    outline: 3px solid #0000003d
-    // border: 1px solid #00000083
+    outline: 3px solid #ff88267c
 .responsive
     @include full-size
     height: auto
@@ -42,6 +41,20 @@ button
 .material-icons
   vertical-align: middle !important
   padding-bottom: 3px
+  &.inherit
+    font-size: inherit
 
 .center
   text-align: center
+
+$max: 5
+$offset: 0.5
+@mixin list-loop($class, $style) 
+  $i: 0
+  @while $i <= $max 
+    #{$class + $i} 
+      #{$style}: #{$i/2 + rem}
+    $i: $i + ($offset*2)
+  
+@include list-loop('.mr', 'margin-right')
+@include list-loop('.ml', 'margin-left')

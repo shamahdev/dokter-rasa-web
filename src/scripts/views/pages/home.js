@@ -1,12 +1,12 @@
-import RestaurantDataSource from "@/data/data";
-import Card from "@/components/card";
-import Modal from "@/components/modal";
+/* eslint-disable max-len */
+import RestaurantDataSource from '@/data/data';
+import Card from '@/components/card';
 
 const Home = {
-    async render() {
-      return `
+  async render() {
+    return `
         <div class="hero">
-            <img src="./images/heros/hero-image_2.jpg" alt="Dokter rasa">
+            <img src="./images/heros/dokterrasa_hero.jpg" alt="Dokter rasa">
             <div class="overlay">
                 <div class="content">
                     <p class="title">dokter rasa</p>
@@ -14,7 +14,7 @@ const Home = {
                 </div>
             </div>
             <div class="group">
-                <a tabindex="0" href="#card" class="btn primary">Cari restoran</a>
+                <a tabindex="0" href="#card-group" class="btn primary">Cari restoran</a>
             </div>
         </div>
         <article id="main">
@@ -39,20 +39,20 @@ const Home = {
             </div>
         </article>
       `;
-    },
-   
-    async afterRender() {
-      const restaurantList = await RestaurantDataSource.list();
+  },
 
-      const cardGroup = document.getElementById("card-group")
-      let restaurantHTML = ``;
-      restaurantList.forEach(restaurant => {
-        restaurantHTML += Card.render(restaurant);
-      });
+  async afterRender() {
+    const restaurantList = await RestaurantDataSource.list();
 
-      cardGroup.innerHTML = restaurantHTML;
-      await Card.createEvent();
-    },
-  };
-   
-  export default Home;
+    const cardGroup = document.getElementById('card-group');
+    let restaurantHTML = ``;
+    restaurantList.forEach((restaurant) => {
+      restaurantHTML += Card.render(restaurant);
+    });
+
+    cardGroup.innerHTML = restaurantHTML;
+    await Card.createEvent(false);
+  },
+};
+
+export default Home;

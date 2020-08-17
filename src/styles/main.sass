@@ -68,6 +68,8 @@ article
         line-height: 0
         margin-right: 0.5rem
         font-size: 1.25rem
+.teardrop
+    @include teardrop
 
 section
     flex: 1 0 auto
@@ -84,9 +86,10 @@ footer
     width: 100%
     padding: 0.75rem 1.5rem
     z-index:1001
-    top: 0%
+    top: 0
     transform: translateY(-100%)
     transition: all .3s
+    @include teardrop(true, 2rem)
     @include media-in("tablet")
         width: auto
     &:focus, &:active
