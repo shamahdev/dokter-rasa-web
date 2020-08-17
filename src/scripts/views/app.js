@@ -1,8 +1,7 @@
-import Navbar from '@/components/navbar';
-import '@/components/spinner';
-
+import '@/components/loading-spinner';
 import UrlParser from '@/routes/urlparser';
-import routes from '@/routes/routes';
+import Routes from '@/routes/routes';
+import NavigationDrawer from '@/utils/navigation-drawer-init';
 
 
 class App {
@@ -15,8 +14,7 @@ class App {
   }
 
   _initialAppShell() {
-    console.log('Berhasil.');
-    Navbar.init({
+    NavigationDrawer.init({
       hamburger: this._hamburger,
       drawer: this._drawer,
       content: this._content,
@@ -24,13 +22,13 @@ class App {
   }
   async loadPage() {
     const url = UrlParser.parseActiveUrlWithCombiner();
-    const page = routes[url];
+    const page = await Routes[url];
     this._content.innerHTML = await page.render();
     await page.afterRender();
   }
-  async refreshPage() {
+  static async refreshPage() {
     const url = UrlParser.parseActiveUrlWithCombiner();
-    const page = routes[url];
+    const page = Routes[url];
     await page.afterRender();
   }
 }

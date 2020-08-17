@@ -1,6 +1,5 @@
-/* eslint-disable max-len */
-import RestaurantDataSource from '@/data/data';
-import Card from '@/components/card';
+import RestaurantApiData from '@/data/restaurant-api-data';
+import RestaurantCatalog from '@/utils/restaurant-catalog-init';
 
 const Home = {
   async render() {
@@ -35,23 +34,18 @@ const Home = {
             </div>
             <h2 class="center">Restoran paling populer</h2>
             <div id="card-group">
-              <loading-spinner/>
+              <loading-spinner></loading-spinner>
             </div>
         </article>
       `;
   },
 
   async afterRender() {
-    const restaurantList = await RestaurantDataSource.list();
-
+    const restaurantCatalogData = await RestaurantApiData.getCatalog();
     const cardGroup = document.getElementById('card-group');
-    let restaurantHTML = ``;
-    restaurantList.forEach((restaurant) => {
-      restaurantHTML += Card.render(restaurant);
-    });
-
-    cardGroup.innerHTML = restaurantHTML;
-    await Card.createEvent(false);
+    cardGroup.innerHTML = ``;
+    await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
+    RestaurantCatalog.initModal();
   },
 };
 

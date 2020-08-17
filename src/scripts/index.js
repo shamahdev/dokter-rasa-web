@@ -1,5 +1,7 @@
-import 'regenerator-runtime'; /* for async await transpile */
+import 'regenerator-runtime';
 import 'styles/main.sass';
+import '@/components/navigation-drawer';
+import '@/components/to-top';
 import App from '@/views/app.js';
 import swRegister from '@/utils/sw-register';
 
@@ -18,16 +20,3 @@ window.addEventListener('load', () => {
   swRegister();
 });
 
-// const main = _ => {
-
-//     window.onscroll = _ => {
-//         const toTop = document.querySelector(".back-to-top");
-//         if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-//             toTop.classList.add("show-to-top");
-//         } else {
-//             toTop.classList.remove("show-to-top");
-//         }
-//     };
-// }
-
-// document.addEventListener("DOMContentLoaded", main);

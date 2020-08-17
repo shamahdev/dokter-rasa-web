@@ -1,6 +1,6 @@
 import {openDB} from 'idb';
 import CONFIG from '@/global/config';
-import Toast from '@/components/toast';
+import ToastEvent from '@/utils/toast-event-init';
 
 const {DATABASE_NAME, DATABASE_VERSION, OBJECT_STORE_NAME} = CONFIG;
 
@@ -18,11 +18,17 @@ const RestaurantBookmark = {
     return (await dbPromise).getAll(OBJECT_STORE_NAME);
   },
   async putBookmark(restaurant) {
-    Toast.init(`Restoran berhasil ditambahkan ke bookmark`, 'success');
+    ToastEvent.init({
+      message: `Restoran berhasil ditambahkan ke bookmark`,
+      type: 'success',
+    });
     return (await dbPromise).put(OBJECT_STORE_NAME, restaurant);
   },
   async deleteBookmark(restaurantId) {
-    Toast.init('Restoran telah dihapus dari bookmark', 'failed');
+    ToastEvent.init({
+      message: `Restoran berhasil dihapus dari bookmark`,
+      type: 'failed',
+    });
     return (await dbPromise).delete(OBJECT_STORE_NAME, restaurantId);
   },
 };

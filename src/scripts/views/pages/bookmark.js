@@ -1,5 +1,5 @@
-import RestaurantBookmark from '@/data/restaurant-idb';
-import Card from '@/components/card';
+import RestaurantBookmark from '@/data/restaurant-bookmark-idb';
+import RestaurantCatalog from '@/utils/restaurant-catalog-init';
 
 const Bookmark = {
   async render() {
@@ -7,25 +7,18 @@ const Bookmark = {
         <article id="main">
             <h2 class="center">Bookmark</h2>
             <div id="card-group">
-              <loading-spinner/>
+              <loading-spinner></loading-spinner>
             </div>
         </article>
       `;
   },
 
   async afterRender() {
-    const restaurantList = await RestaurantBookmark.getAllBookmark();
-    console.log(restaurantList);
-
+    const restaurantCatalogData = await RestaurantBookmark.getAllBookmark();
     const cardGroup = document.getElementById('card-group');
-    let restaurantHTML = ``;
-    restaurantList.forEach((restaurant) => {
-      restaurantHTML += Card.render(restaurant);
-    });
-
-    cardGroup.innerHTML = restaurantHTML;
-    // Add 'is-on-bookmark' dataset = true
-    await Card.createEvent(true);
+    cardGroup.innerHTML = ``;
+    await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
+    RestaurantCatalog.initModalFromBookmark();
   },
 };
 
