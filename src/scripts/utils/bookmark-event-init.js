@@ -1,12 +1,13 @@
 import RestaurantBookmark from '@/data/restaurant-bookmark-idb';
 import RestaurantApiData from '@/data/restaurant-api-data';
 import App from '@/views/app';
+import ToastEvent from '@/utils/toast-event-init';
 
 const BookmarkEvent = {
-  async init(bookmarkButton) {
+  init(bookmarkButton) {
     this._bookmarkButton = bookmarkButton;
     this._id = this._bookmarkButton.dataset.bookmark;
-    await this._createEvent();
+    this._createEvent();
   },
 
   async _createEvent() {
@@ -31,10 +32,15 @@ const BookmarkEvent = {
     const addEvent = async (event) => {
       event.stopPropagation();
       const restaurant = await RestaurantApiData.getRestaurantDetail(id);
-      RestaurantBookmark.putBookmark(restaurant.restaurant);
-
-      bookmark.removeEventListener('click', addEvent.bind(this));
-      App.refreshPage();
+      if (JSON.stringify(restaurant) === '{}') {
+        ToastEvent.init({
+          message: `Gagal ditambahkan ke bookmark, Periksa kembali internet anda.`,
+          type: 'failed',
+        });
+      } else {
+        RestaurantBookmark.putBookmark(restaurant.restaurant);
+        this._sync(bookmark, addEvent);
+      }
     };
     bookmark.addEventListener('click', addEvent.bind(this));
   },
@@ -46,11 +52,22 @@ const BookmarkEvent = {
     const removeEvent = async (event) => {
       event.stopPropagation();
       await RestaurantBookmark.deleteBookmark(id);
-
-      bookmark.removeEventListener('click', removeEvent.bind(this));
-      App.refreshPage();
+      this._sync(bookmark, removeEvent);
     };
     bookmark.addEventListener('click', removeEvent.bind(this));
+  },
+
+  async _sync(bookmark, event) {
+    bookmark.removeEventListener('click', event.bind(this));
+    await this._createEvent();
+    App.refreshPage();
+
+    setTimeout(async () => {
+      const backtoDetailButton = document.querySelector(`button[data-bookmark="${bookmark.dataset.bookmark}"]`);
+      if (backtoDetailButton) {
+        await backtoDetailButton.focus();
+      }
+    }, 300);
   },
 };
 

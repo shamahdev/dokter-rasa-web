@@ -16,7 +16,13 @@ precacheAndRoute(self.__WB_MANIFEST, {
 
 registerRoute(
     ({url}) => url.origin,
-    new StaleWhileRevalidate(),
+    new StaleWhileRevalidate({
+      plugins: [
+        new CacheableResponsePlugin({
+          statuses: [0, 200],
+        }),
+      ],
+    }),
 );
 
 registerRoute(

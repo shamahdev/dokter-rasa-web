@@ -76,6 +76,7 @@ section
 footer
     color: #ffffff
     text-align: center
+    margin-top: 1rem
     padding: 1.5rem
     background-color: map-get($colors, "primary")
 
@@ -101,6 +102,10 @@ footer
     font-size: 0.9rem
     text-transform: capitalize
     margin: 0.5rem 0
+.big-guide
+    @extend .guide
+    font-size: 1rem
+    font-weight: bold
 
 .showcase
     padding: 2.5rem 0
@@ -112,7 +117,17 @@ footer
         width: 100%
         padding: 2rem
         @include flex(column)
-        i
+        span
             color: map-get($colors, "primary")
             font-size: 5rem
             margin-bottom: 0.5rem
+.msg-group
+    display: grid
+    margin: 0 auto
+    gap: 1rem
+.capsule
+    display: inline-block
+    @include teardrop
+    padding: 0.55rem 0.75rem
+    background-color: lighten(map-get($colors, "primary"), 50%)
+    margin: 0.25rem

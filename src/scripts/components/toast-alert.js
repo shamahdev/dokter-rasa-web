@@ -9,7 +9,7 @@ class ToastAlert extends HTMLElement {
   _render() {
     this.id = this._id;
     this.setAttribute('role', 'modal');
-    this.classList.add('toast', 'show-toast', this._type);
+    this.classList.add('toast', this._type);
     this.innerHTML =
     `<p>${this._message}</p>
     <button tabindex="0" aria-label="Close toast" class="btn close-toast ${this._type} side icon">

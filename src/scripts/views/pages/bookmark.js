@@ -16,9 +16,17 @@ const Bookmark = {
   async afterRender() {
     const restaurantCatalogData = await RestaurantBookmark.getAllBookmark();
     const cardGroup = document.getElementById('card-group');
-    cardGroup.innerHTML = ``;
-    await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
-    RestaurantCatalog.initModalFromBookmark();
+    if (restaurantCatalogData.length > 0) {
+      cardGroup.innerHTML = ``;
+      await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
+      RestaurantCatalog.initModalFromBookmark();
+    } else {
+      cardGroup.innerHTML =
+      `<div class="msg-group">
+        <p class="center mh-auto"><span class="material-icons mr1" aria-hidden="true">not_interested</span>Belum ada restoran yang ditambahkan ke bookmark</p>
+        <a tabindex="0" href="#/home" class="btn primary center mh-auto">Cari Restoran</a>
+      </div>`;
+    }
   },
 };
 

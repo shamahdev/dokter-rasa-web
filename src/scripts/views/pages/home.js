@@ -1,5 +1,6 @@
 import RestaurantApiData from '@/data/restaurant-api-data';
 import RestaurantCatalog from '@/utils/restaurant-catalog-init';
+import ToastEvent from '@/utils/toast-event-init';
 
 const Home = {
   async render() {
@@ -13,22 +14,22 @@ const Home = {
                 </div>
             </div>
             <div class="group">
-                <a tabindex="0" href="#card-group" class="btn primary">Cari restoran</a>
+                <a tabindex="0" href="#/bookmark" class="btn primary">Lihat Bookmark</a>
             </div>
         </div>
         <article id="main">
             <h2 class="center">Kenapa pilih kami</h2>
             <div class="showcase">
                 <div class="icon-group">
-                    <i class="material-icons">bookmark</i>
+                    <span class="material-icons" aria-label="Bookmark">bookmark</span>
                     <p>Simpan Restoran favoritmu untuk dikunjungi nanti</p>
                 </div>
                 <div class="icon-group">
-                    <i class="material-icons">star</i>
-                    <p>Cari tahu sebagus apa resoran dengan fitur rating dari pengunjung</p>
+                    <span class="material-icons" aria-label="Rating & Review">star</span>
+                    <p>Cari tahu sebagus apa resoran dengan fitur rating dan review dari pengunjung</p>
                 </div>
                 <div class="icon-group">
-                    <i class="material-icons">local_dining</i>
+                    <span class="material-icons" aria-label="Menu Pilihan">local_dining</span>
                     <p>Pilih restoran dengan menu yang cocok untuk kamu dan keluarga</p>
                 </div>
             </div>
@@ -41,11 +42,19 @@ const Home = {
   },
 
   async afterRender() {
-    const restaurantCatalogData = await RestaurantApiData.getCatalog();
     const cardGroup = document.getElementById('card-group');
-    cardGroup.innerHTML = ``;
-    await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
-    RestaurantCatalog.initModal();
+    try {
+      const restaurantCatalogData = await RestaurantApiData.getCatalog();
+      cardGroup.innerHTML = ``;
+      await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
+      RestaurantCatalog.initModal();
+    } catch (err) {
+      cardGroup.innerHTML =
+      `<div class="msg-group">
+        <p class="center mh-auto"><span class="material-icons mr1" aria-hidden="true">wifi_off</span>List Restoran tidak dapat di tampilkan. Periksa kembali internet anda :)</p>
+        <a tabindex="0" href="#/home" class="btn primary center mh-auto">Refresh</a>
+      </div>`;
+    }
   },
 };
 

@@ -21,7 +21,11 @@ class App {
     });
   }
   async loadPage() {
-    const url = UrlParser.parseActiveUrlWithCombiner();
+    let url = UrlParser.parseActiveUrlWithCombiner();
+    if (!(url in Routes)) {
+      window.location.hash = '#/404';
+      url = UrlParser.parseActiveUrlWithCombiner();
+    }
     const page = await Routes[url];
     this._content.innerHTML = await page.render();
     await page.afterRender();

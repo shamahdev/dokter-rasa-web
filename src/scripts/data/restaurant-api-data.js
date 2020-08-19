@@ -4,14 +4,24 @@ import CONFIG from '@/global/config';
 
 class RestaurantApiData {
   static async getCatalog() {
-    const response = await fetch(API_ENDPOINT.LIST);
-    const responseJson = await response.json();
-    return responseJson.restaurants;
+    try {
+      const response = await fetch(API_ENDPOINT.LIST);
+      const responseJson = await response.json();
+      return responseJson.restaurants;
+    } catch (err) {
+      console.log(err);
+      return {};
+    }
   }
 
   static async getRestaurantDetail(id) {
-    const response = await fetch(API_ENDPOINT.DETAIL(id));
-    return response.json();
+    try {
+      const response = await fetch(API_ENDPOINT.DETAIL(id));
+      return response.json();
+    } catch (err) {
+      console.log(err);
+      return {};
+    }
   }
 
   static async addReview(review) {

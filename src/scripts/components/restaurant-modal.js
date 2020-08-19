@@ -2,11 +2,43 @@ class RestaurantModal extends HTMLElement {
   set restaurant(restaurant) {
     this._restaurant = restaurant;
     this._restaurantReviews = this._restaurant.consumerReviews;
+    this._restaurantCategories = this._restaurant.categories;
+    this._restaurantMenu = this._restaurant.menus;
     this._render();
   }
 
   set reviews(reviews) {
     this._restaurantReviews = reviews;
+  }
+
+  get foods() {
+    const foodList = this._restaurantMenu.foods;
+    let foodListHtml = ``;
+    foodList.forEach((food) => {
+      foodListHtml +=
+        `<p>${food.name}</p>`;
+    });
+    return foodListHtml;
+  }
+
+  get drinks() {
+    const drinkList = this._restaurantMenu.drinks;
+    let drinkListHtml = ``;
+    drinkList.forEach((drink) => {
+      drinkListHtml +=
+        `<p>${drink.name}</p>`;
+    });
+    return drinkListHtml;
+  }
+
+  get categories() {
+    const restaurantCategories = this._restaurantCategories;
+    let categoryListHtml = ``;
+    restaurantCategories.forEach((category) => {
+      categoryListHtml +=
+        `<p class="capsule">${category.name}</p>`;
+    });
+    return categoryListHtml;
   }
 
   get reviewList() {
@@ -38,21 +70,25 @@ class RestaurantModal extends HTMLElement {
                     <span class="material-icons" aria-hidden="true" >close</span>
                 </button>
             </div>
-            <div class="modal-content">
-                <small class="guide">Press F to add to bookmark</small>
+            <div class="modal-content" tabindex="0" aria-label="${restaurant.name} Detail">
+                <small class="guide">Press B to add to bookmark</small>
                 <h3 class="modal-title">${restaurant.name}</h3>
                 <div class="star">
                     <span>${this._getStarRating(restaurant.rating)}</span>
                     <p>${restaurant.rating}/5</p>
                 </div>
                 <small class="guide"><i class="material-icons inherit mr1" aria-hidden="true">place</i>${restaurant.address}, ${restaurant.city}</small>
-                <p class="modal-description">${restaurant.description.substring(0, 125)}</p>
+                <p class="modal-description">${restaurant.description.substring(0, 128)}.</p>
                 <h3 class="modal-title">Kategori</h3>
-                <p class="modal-description">${restaurant.categories}</p>
+                <div class="modal-category"></div>
                 <h3 class="modal-title">Menu</h3>
-                <div id="restaurantMenu">
-                    <span class="material-icons" aria-hidden="true">fastfood</span>
-                    <span class="material-icons" aria-hidden="true">emoji_food_beverage</span>
+                <div class="modal-menu">
+                  <div class="food">
+                    <p class="big-guide"><span class="material-icons mr1" aria-hidden="true">fastfood</span>Makanan</p>
+                  </div>
+                  <div class="drink">
+                    <p class="big-guide"><span class="material-icons mr1" aria-hidden="true">emoji_food_beverage</span>Minuman</p>
+                  </div>
                 </div>
                 <p>
                 <h3 class="modal-title">Review Pengunjung</h3>
@@ -60,7 +96,7 @@ class RestaurantModal extends HTMLElement {
             </div>
             <div class="modal-form">
                 <div class="btn-group">
-                    <h3 class="collabsible-title"><i class="material-icons mr1 ml2" aria-hidden="true">add_comment</i>Berikan Tanggapan</h3>
+                    <h3 class="collabsible-title"><i class="material-icons mr1 ml2" aria-hidden="true">add_comment</i>Berikan Review</h3>
                     <button tabindex="0" id="review-collapse" aria-label="Open Review tab" class="btn primary side icon">
                         <span class="material-icons" aria-hidden="true">keyboard_arrow_up</span>
                     </button>

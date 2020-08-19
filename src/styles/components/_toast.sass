@@ -1,21 +1,21 @@
+#toast-container
+    position: fixed
+    bottom: auto
+    top: 0
+    left: 50%
+    z-index: 1003
+    width: 100%
+    @include flex(column)
+    
 .toast
     opacity: 0
     visibility: hidden
-    z-index: 1003
     transition: all .3s
-    position: fixed
-    bottom: 0
-    left: 50%
-    transform: translate(-50%, 100%)
     @include flex(row)
     width: 100%
     @each $name, $color in $colors
         &.#{$name}
             background-color: $color
-    @include media-in(desktop)
-        bottom: auto
-        top: 0
-        transform: translate(-50%, -100%)
     p
         text-align: center
         width: 100%

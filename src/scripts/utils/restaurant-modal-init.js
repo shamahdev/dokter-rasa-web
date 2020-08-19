@@ -11,38 +11,52 @@ const ModalInitiator = {
 
     this._RestaurantModalElement = document.createElement('restaurant-modal');
     this._RestaurantModalElement.restaurant = await this._getData();
-    await this._body.appendChild(this._RestaurantModalElement);
+    this._body.appendChild(this._RestaurantModalElement);
 
     // Modal
     this._modal = document.getElementById(this._restaurantId);
-    this._allModalButtons = this._modal.querySelectorAll('button, a');
+    this._allFocusableElement = this._modal.querySelectorAll('button, a, .modal-content');
     this._bookmarkButton = this._modal.querySelector(`button[data-bookmark="${this._modal.id}"]`);
     this._closeButton = this._modal.querySelector('button.close-button');
-
-    // Review
+    this._modalContent = this._modal.querySelector('.modal-content');
+    this._modalCategory = this._modal.querySelector('.modal-category');
+    this._modalMenu = this._modal.querySelector('.modal-menu');
     this._reviewForm = this._modal.querySelector('form#review-form');
     this._reviewContent = this._modal.querySelector('.modal-review');
-    this._reviewContent.innerHTML = await this._RestaurantModalElement.reviewList;
 
-
-    setTimeout(() => {
-      this._createEvent();
-    }, 100);
+    this._renderModalComponent();
   },
 
-  async _resyncReview(review) {
-    console.warn('Review re-sync complete.');
+  _renderModalComponent() {
+    const modalCategory = this._modalCategory;
+    const reviewContent = this._reviewContent;
+    modalCategory.innerHTML = this._RestaurantModalElement.categories;
+    reviewContent.innerHTML = this._RestaurantModalElement.reviewList;
+    this._renderMenuList();
+    this._createEvent();
+  },
+
+  _renderMenuList() {
+    const foodListHtml = this._modalMenu.querySelector('.food');
+    const drinkListHtml = this._modalMenu.querySelector('.drink');
+
+    foodListHtml.innerHTML += this._RestaurantModalElement.foods;
+    drinkListHtml.innerHTML += this._RestaurantModalElement.drinks;
+  },
+
+  _resyncReview(review) {
+    console.log('Review re-sync complete.');
     const reviewContent = this._reviewContent;
     const RestaurantModalElement = this._RestaurantModalElement;
     RestaurantModalElement.reviews = review;
-    reviewContent.innerHTML = await RestaurantModalElement.reviewList;
+    reviewContent.innerHTML = RestaurantModalElement.reviewList;
   },
 
   async _getData() {
     let restaurantData = '';
     if (this._getFromBookmark) {
       restaurantData = await RestaurantBookmark.getBookmark(this._restaurantId);
-      console.warn('Data is collected from IndexedDB.');
+      console.log('Data is collected from IndexedDB.');
     } else {
       restaurantData = await RestaurantApiData.getRestaurantDetail(this._restaurantId);
       restaurantData = restaurantData.restaurant;
@@ -51,16 +65,16 @@ const ModalInitiator = {
   },
 
   async _createEvent() {
+    this._toggleModal();
     const bookmarkButton = this._bookmarkButton;
     const closeButton = this._closeButton;
 
     await BookmarkEvent.init(bookmarkButton);
-    await this._initReviewForm();
-
-    this._toggleModal();
+    this._initReviewForm();
 
     document.addEventListener('keyup', this._keyEvent.bind(this));
     closeButton.addEventListener('click', this._closeModal.bind(this));
+    bookmarkButton.addEventListener('click', this._closeModal.bind(this));
   },
 
   async _initReviewForm() {
@@ -97,33 +111,55 @@ const ModalInitiator = {
 
   _keyEvent(event) {
     const modal = this._modal;
-    const allModalButtons = this._allModalButtons;
+    const allFocusableElement = this._allFocusableElement;
+    const bookmarkButton = this._bookmarkButton;
+    const trapButton = document.querySelector('to-top button');
     if (modal.id) {
       if (event.keyCode === 27) {
         this._closeModal();
-      } else if (event.keyCode === 70) {
-        // Nothing
-      } else if (event.keyCode === 9) {
-        if (event.target === allModalButtons[allModalButtons.length - 2]) {
-          const collapseToggler = modal.querySelector('#review-collapse');
-          collapseToggler.click();
+      } else if (event.keyCode === 66) {
+        bookmarkButton.click();
+      } else if (event.keyCode === 9 ) {
+        // Shift + Tab
+        if (event.shiftKey) {
+          if (event.target === trapButton) {
+            allFocusableElement[0].focus();
+          } else if (event.target === allFocusableElement[allFocusableElement.length - 3]) {
+            const collapseToggler = modal.querySelector('#review-collapse');
+            collapseToggler.click();
+          }
+        // Tab
+        } else {
+          if (event.target === allFocusableElement[allFocusableElement.length - 2]) {
+            const collapseToggler = modal.querySelector('#review-collapse');
+            collapseToggler.click();
+          }
         }
       }
     }
+    event.preventDefault();
   },
 
   _toggleModal() {
     const body = this._body;
     const modal = this._modal;
-    body.classList.toggle('opened2');
+    const bookmarkBtn = this._bookmarkButton;
+    body.classList.toggle('opened-modal');
     modal.classList.toggle('show-modal');
+
+    setTimeout(() => {
+      bookmarkBtn.focus();
+    }, 200);
   },
 
   _closeModal() {
     const body = document.querySelector('body');
     const modal = this._modal;
-    body.classList.remove('opened2');
+    body.classList.remove('opened-modal');
     modal.classList.remove('show-modal');
+
+    // Remove event listener
+    document.removeEventListener('keyup', this._keyEvent.bind(this));
 
     setTimeout(async () => {
       await document.querySelector(`button[data-modal="${modal.id}"]`).focus();

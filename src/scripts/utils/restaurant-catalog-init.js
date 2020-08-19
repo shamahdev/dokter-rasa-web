@@ -1,6 +1,7 @@
 import '@/components/restaurant-card';
 import ModalInitiator from '@/utils/restaurant-modal-init';
 import BookmarkEvent from '@/utils/bookmark-event-init';
+import ToastEvent from '@/utils/toast-event-init';
 
 const RestaurantCatalog = {
   init(restaurantCatalog, container) {
@@ -20,14 +21,22 @@ const RestaurantCatalog = {
     detailButton.forEach( (element) => {
       element.addEventListener('click', async (event) => {
         event.stopPropagation();
-        await ModalInitiator.init(element.dataset.modal);
+        try {
+          await ModalInitiator.init(element.dataset.modal);
+        } catch (err) {
+          console.log(err);
+          ToastEvent.init({
+            message: `Gagal menampilkan data, Periksa kembali internet anda.`,
+            type: 'failed',
+          });
+        }
       });
     });
   },
 
   initModalFromBookmark() {
     this.initBookmark();
-    const detailButton = document.querySelectorAll('button[data-modal]');
+    const detailButton = this._container.querySelectorAll('button[data-modal]');
     detailButton.forEach( (element) => {
       element.addEventListener('click', async (event) => {
         event.stopPropagation();
@@ -37,7 +46,7 @@ const RestaurantCatalog = {
   },
 
   initBookmark() {
-    const bookmarkButton = document.querySelectorAll('button[data-bookmark]');
+    const bookmarkButton = this._container.querySelectorAll('button[data-bookmark]');
     bookmarkButton.forEach( async (element) => {
       await BookmarkEvent.init(element);
     });

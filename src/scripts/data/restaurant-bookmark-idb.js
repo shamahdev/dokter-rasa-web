@@ -19,14 +19,14 @@ const RestaurantBookmark = {
   },
   async putBookmark(restaurant) {
     ToastEvent.init({
-      message: `Restoran berhasil ditambahkan ke bookmark`,
+      message: `Bookmark berhasil ditambahkan`,
       type: 'success',
     });
     return (await dbPromise).put(OBJECT_STORE_NAME, restaurant);
   },
   async deleteBookmark(restaurantId) {
     ToastEvent.init({
-      message: `Restoran berhasil dihapus dari bookmark`,
+      message: `Bookmark berhasil dihapus`,
       type: 'failed',
     });
     return (await dbPromise).delete(OBJECT_STORE_NAME, restaurantId);

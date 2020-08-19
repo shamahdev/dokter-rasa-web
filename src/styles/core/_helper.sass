@@ -11,7 +11,7 @@ html, body
   scroll-behavior: smooth
   background-color: map-get($colors, "light")
   @include full-size
-  &.opened, &.opened2
+  &.opened, &.opened-modal
     overflow: hidden
 body
   display: flex
@@ -55,6 +55,10 @@ $offset: 0.5
     #{$class + $i} 
       #{$style}: #{$i/2 + rem}
     $i: $i + ($offset*2)
-  
+
+.mh-auto
+  margin: 0 auto
+.mv-auto
+  margin: auto 0
 @include list-loop('.mr', 'margin-right')
 @include list-loop('.ml', 'margin-left')
