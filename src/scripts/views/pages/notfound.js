@@ -6,7 +6,7 @@ const NotFound = {
             <div id="card-group">
                 <div class="msg-group">
                     <p class="center mh-auto"><span class="material-icons mr1" aria-hidden="true">error</span>Error 404 Not Found</p>
-                    <a tabindex="0" href="#/home" class="btn primary center mh-auto">Kembali ke Home</a>
+                    <a tabindex="0" href="#/home" class="btn primary rounded center mh-auto">Kembali ke Home</a>
                 </div>
             </div>
         </article>

@@ -6,6 +6,7 @@ const Bookmark = {
     return `
         <article id="main">
             <h2 class="center">Bookmark</h2>
+            <p class="description center mh-auto">Mau pergi kemana hari ini?</p>
             <div id="card-group">
               <loading-spinner></loading-spinner>
             </div>
@@ -24,7 +25,7 @@ const Bookmark = {
       cardGroup.innerHTML =
       `<div class="msg-group">
         <p class="center mh-auto"><span class="material-icons mr1" aria-hidden="true">not_interested</span>Belum ada restoran yang ditambahkan ke bookmark</p>
-        <a tabindex="0" href="#/home" class="btn primary center mh-auto">Cari Restoran</a>
+        <a tabindex="0" href="#/home" class="btn primary rounded center mh-auto">Cari Restoran</a>
       </div>`;
     }
   },

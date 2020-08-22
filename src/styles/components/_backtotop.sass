@@ -7,8 +7,11 @@
   z-index: 1001
   @include media-in(desktop)
     right: 2rem
-  i
-    padding: 1.5rem
+  button
+    border-top-left-radius: 1.5rem
+    padding: 1rem
+    @include media-in(desktop)
+      border-top-right-radius: 1.5rem
   &.show-to-top
     transform: translate(0, 0%)
 

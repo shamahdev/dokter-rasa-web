@@ -8,9 +8,9 @@
     @include flex(column)
     
 .toast
-    opacity: 0
-    visibility: hidden
     transition: all .3s
+    transform: translate(-50%, -100%)
+    border-bottom-left-radius: 2.5rem
     @include flex(row)
     width: 100%
     @each $name, $color in $colors
@@ -21,7 +21,6 @@
         width: 100%
         padding: 1rem
     &.show-toast 
-        opacity: 1
         visibility: visible
         transition: all .3s
         transform: translate(-50%, 0%)

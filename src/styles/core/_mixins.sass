@@ -12,6 +12,15 @@
   height: 100%
   width: 100%
 
+$max: 8
+$offset: 0.5
+@mixin list-loop($class, $style) 
+  $i: 0
+  @while $i <= $max 
+    #{$class + $i} 
+      #{$style}: #{$i/2 + rem}
+    $i: $i + ($offset*2)
+
 @mixin teardrop($reverse: false, $size: 2.5rem)
   @if ($reverse == true)
     border-radius: 0
@@ -19,3 +28,7 @@
   @else
     border-radius: $size
     border-bottom-right-radius: 0
+
+@include list-loop('.mr', 'margin-right')
+@include list-loop('.ml', 'margin-left')
+@include list-loop('.mt', 'margin-top')

@@ -20,20 +20,35 @@ class App {
       content: this._content,
     });
   }
+
   async loadPage() {
-    let url = UrlParser.parseActiveUrlWithCombiner();
+    const url = UrlParser.parseActiveUrlWithCombiner();
     if (!(url in Routes)) {
-      window.location.hash = '#/404';
-      url = UrlParser.parseActiveUrlWithCombiner();
+      this._content.innerHTML = await this._load404();
     }
     const page = await Routes[url];
     this._content.innerHTML = await page.render();
     await page.afterRender();
   }
+
   static async refreshPage() {
     const url = UrlParser.parseActiveUrlWithCombiner();
     const page = Routes[url];
     await page.afterRender();
+  }
+
+  async _load404() {
+    return `
+        <article id="main">
+            <h2 class="center">Halaman tidak ditemukan</h2>
+            <div id="card-group">
+                <div class="msg-group">
+                    <p class="center mh-auto"><span class="material-icons mr1" aria-hidden="true">error</span>Error 404 Not Found</p>
+                    <a tabindex="0" href="#/home" class="btn primary rounded center mh-auto">Kembali ke Home</a>
+                </div>
+            </div>
+        </article>
+      `;
   }
 }
 

@@ -41,24 +41,17 @@ button
 .material-icons
   vertical-align: middle !important
   padding-bottom: 3px
+  user-select: none
   &.inherit
     font-size: inherit
-
 .center
   text-align: center
-
-$max: 5
-$offset: 0.5
-@mixin list-loop($class, $style) 
-  $i: 0
-  @while $i <= $max 
-    #{$class + $i} 
-      #{$style}: #{$i/2 + rem}
-    $i: $i + ($offset*2)
+.rounded
+  border-radius: 2.5rem
+.rounded-top-left
+  border-top-left-radius: 1.5rem
 
 .mh-auto
   margin: 0 auto
 .mv-auto
   margin: auto 0
-@include list-loop('.mr', 'margin-right')
-@include list-loop('.ml', 'margin-left')

@@ -1,4 +1,5 @@
 import CONFIG from '@/global/config';
+import SlugParser from '@/routes/slugparser';
 
 class RestaurantCard extends HTMLElement {
   set restaurant(restaurant) {
@@ -19,10 +20,11 @@ class RestaurantCard extends HTMLElement {
             <span>${this._getStarRating(restaurant.rating)}</span>
             <p>${restaurant.rating}/5</p>
           </div>
+          <p class="description">${restaurant.description.substring(0, 128)}</p>
         </div>
         <div class="btn-group">
-          <button tabindex="0" data-bookmark=${restaurant.id} aria-label="Add to bookmark" class="btn icon right"><span class="material-icons" aria-hidden="true">bookmark_border</span></button>
-          <button tabindex="0" data-modal="${restaurant.id}" class="trigger btn primary side">Lihat detail</a>
+          <button tabindex="0" data-bookmark=${restaurant.id} aria-label="Add to bookmark" class="btn rounded-top-left icon right"><span class="material-icons" aria-hidden="true">bookmark_border</span></button>
+          <a tabindex="0" href="#/restaurant/${SlugParser.parseToSlug(restaurant.name)}" class="trigger btn primary side">Lihat detail</a>
         </div>
         </div>
       </div>`;
