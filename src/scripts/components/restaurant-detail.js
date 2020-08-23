@@ -63,15 +63,19 @@ class RestaurantDetail extends HTMLElement {
       `<div class="hero teardrop">
           <img class="teardrop" src="${CONFIG.BASE_IMAGE_URL}medium/${restaurant.pictureId}" alt="${restaurant.name}">
       </div>
+      <div class="btn-group">
+      <button tabindex="0" aria-label="Add Review" class="btn primary icon right"><span class="material-icons" aria-hidden="true">comment</span></button>
+        <button tabindex="0" data-bookmark=${restaurant.id} aria-label="Add to bookmark" class="btn icon"><span class="material-icons" aria-hidden="true">bookmark_border</span></button>
+      </div>
       <div class="modal-content" aria-label="${restaurant.name} Detail">
-                <small class="guide">Press B to add to bookmark</small>
+                <small class="guide">Press <b>B</b> to add to bookmark</small>
                 <h3 class="modal-title">${restaurant.name}</h3>
                 <div class="star">
                     <span>${this._getStarRating(restaurant.rating)}</span>
                     <p>${restaurant.rating}/5</p>
                 </div>
-                <small class="guide"><i class="material-icons inherit mr1" aria-hidden="true">place</i>${restaurant.address}, ${restaurant.city}</small>
-                <p class="modal-description">${restaurant.description.substring(0, 128)}.</p>
+                <a href="https://www.google.com/maps/search/${restaurant.address}" target="_blank" class="guide"><i class="material-icons inherit mr1" aria-hidden="true">place</i>${restaurant.address}, ${restaurant.city}</a>
+                <p class="modal-description">${restaurant.description}.</p>
                 <h3 class="modal-title">Kategori</h3>
                 <div class="modal-category"></div>
                 <h3 class="modal-title">Menu</h3>
@@ -88,12 +92,7 @@ class RestaurantDetail extends HTMLElement {
                 <div class="modal-review"></div>
             </div>
             <div class="modal-form">
-                <div class="btn-group">
-                    <h3 class="collabsible-title"><i class="material-icons mr1 ml2" aria-hidden="true">add_comment</i>Berikan Review</h3>
-                    <button tabindex="0" id="review-collapse" aria-label="Open Review tab" class="btn primary side icon">
-                        <span class="material-icons" aria-hidden="true">keyboard_arrow_up</span>
-                    </button>
-                </div>
+            <h3 class="collabsible-title"><i class="material-icons mr1 ml2" aria-hidden="true">add_comment</i>Berikan Review</h3>
                 <form id="review-form">
                 <div class="form-input">
                     <input type="text" id="name" name="name" placeholder="Nama" required>

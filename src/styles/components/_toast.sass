@@ -10,9 +10,10 @@
 .toast
     transition: all .3s
     transform: translate(-50%, -100%)
-    border-bottom-left-radius: 2.5rem
     @include flex(row)
     width: 100%
+    &:last-child
+        border-bottom-left-radius: 2.5rem
     @each $name, $color in $colors
         &.#{$name}
             background-color: $color

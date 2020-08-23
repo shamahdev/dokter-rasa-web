@@ -1,5 +1,6 @@
 import {openDB} from 'idb';
 import CONFIG from '@/global/config';
+import SlugParser from '@/routes/slugparser';
 import ToastEvent from '@/utils/toast-event-init';
 
 const {DATABASE_NAME, DATABASE_VERSION, OBJECT_STORE_NAME} = CONFIG;
@@ -19,7 +20,7 @@ const RestaurantBookmark = {
   },
   async putBookmark(restaurant) {
     ToastEvent.init({
-      message: `Bookmark berhasil ditambahkan`,
+      message: `<a class="guide" href="#/restaurant/${SlugParser.parseToSlug(restaurant.name)}">${restaurant.name}</a> telah ditambahkan kedalam bookmark`,
       type: 'success',
     });
     return (await dbPromise).put(OBJECT_STORE_NAME, restaurant);

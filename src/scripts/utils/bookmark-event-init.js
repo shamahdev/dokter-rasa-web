@@ -1,74 +1,60 @@
 import RestaurantBookmark from '@/data/restaurant-bookmark-idb';
 import RestaurantApiData from '@/data/restaurant-api-data';
-import App from '@/views/app';
 import ToastEvent from '@/utils/toast-event-init';
 
 const BookmarkEvent = {
-  init(bookmarkButton) {
+  async init(bookmarkButton) {
     this._bookmarkButton = bookmarkButton;
-    this._id = this._bookmarkButton.dataset.bookmark;
-    this._createEvent();
+    await this._createEvent();
   },
 
-  async _createEvent() {
-    const bookmark = this._bookmarkButton;
-    const id = this._id;
-    if (await this._isRestaurantExist(id)) {
-      this._removeBookmark(bookmark, id);
+  async _createEvent(bookmarkButton = this._bookmarkButton, bookmarkId = bookmarkButton.dataset.bookmark) {
+    if (await this._isRestaurantExist(bookmarkId)) {
+      this._removeBookmark(bookmarkButton);
     } else {
-      this._addBookmark(bookmark, id);
+      this._addBookmark(bookmarkButton);
     }
   },
 
-  async _isRestaurantExist(id) {
-    const restaurant = await RestaurantBookmark.getBookmark(id);
+  async _isRestaurantExist(bookmarkId) {
+    const restaurant = await RestaurantBookmark.getBookmark(bookmarkId);
     return !!restaurant;
   },
 
-  _addBookmark(bookmark, id) {
-    const bookmarkIcon = bookmark.querySelector(`span`);
+  _addBookmark(bookmarkButton) {
+    const bookmarkId = bookmarkButton.dataset.bookmark;
+    const bookmarkIcon = bookmarkButton.querySelector(`span`);
     bookmarkIcon.innerHTML = 'bookmark_border';
 
     const addEvent = async (event) => {
       event.stopPropagation();
-      const restaurant = await RestaurantApiData.getRestaurantDetail(id);
+      const restaurant = await RestaurantApiData.getRestaurantDetail(bookmarkId);
       if (JSON.stringify(restaurant) === '{}') {
         ToastEvent.init({
           message: `Gagal ditambahkan ke bookmark, Periksa kembali internet anda.`,
           type: 'failed',
         });
       } else {
-        RestaurantBookmark.putBookmark(restaurant.restaurant);
-        this._sync(bookmark, addEvent);
+        await RestaurantBookmark.putBookmark(restaurant.restaurant);
+        this._createEvent(bookmarkButton);
       }
     };
-    bookmark.addEventListener('click', addEvent.bind(this));
+    bookmarkButton.addEventListener('click', addEvent.bind(this), {once: true});
   },
 
-  _removeBookmark(bookmark, id) {
-    const bookmarkIcon = bookmark.querySelector(`span`);
+  _removeBookmark(bookmarkButton) {
+    const bookmarkId = bookmarkButton.dataset.bookmark;
+    const bookmarkIcon = bookmarkButton.querySelector(`span`);
     bookmarkIcon.innerHTML = 'bookmark';
 
     const removeEvent = async (event) => {
       event.stopPropagation();
-      await RestaurantBookmark.deleteBookmark(id);
-      this._sync(bookmark, removeEvent);
+      await RestaurantBookmark.deleteBookmark(bookmarkId);
+      this._createEvent(bookmarkButton);
     };
-    bookmark.addEventListener('click', removeEvent.bind(this));
+    bookmarkButton.addEventListener('click', removeEvent.bind(this), {once: true});
   },
 
-  async _sync(bookmark, event) {
-    bookmark.removeEventListener('click', event.bind(this));
-    await this._createEvent();
-    App.refreshPage();
-
-    setTimeout(async () => {
-      const backtoDetailButton = document.querySelector(`button[data-bookmark="${bookmark.dataset.bookmark}"]`);
-      if (backtoDetailButton) {
-        await backtoDetailButton.focus();
-      }
-    }, 300);
-  },
 };
 
 export default BookmarkEvent;

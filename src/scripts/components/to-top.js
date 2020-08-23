@@ -19,6 +19,7 @@ class BackToTop extends HTMLElement {
     };
     this.addEventListener('click', this._backtoTop);
     document.addEventListener('keydown', (event) => {
+      event.stopPropagation();
       this._body = document.querySelector('body');
       if (event.keyCode === 84) {
         if (!(this._body.classList.contains('opened-modal'))) {

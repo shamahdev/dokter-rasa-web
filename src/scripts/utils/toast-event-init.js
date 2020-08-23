@@ -1,28 +1,29 @@
 import '@/components/toast-alert';
 
 const ToastEvent = {
-  async init({message, type = 'default'}) {
-    this._container = document.getElementById('toast-container');
+  _container: document.getElementById('toast-container'),
 
-    // Init toast
-    this._TOAST_ID = Math.random().toString(36).substring(5);
+  async init({message, type = 'default'}) {
+    const TOAST_ID = Math.random().toString(36).substring(5);
     const ToastElement = document.createElement('toast-alert');
+
     ToastElement.message = {
-      id: this._TOAST_ID,
+      id: TOAST_ID,
       text: message,
       type: type,
     };
 
-    await this._container.appendChild(ToastElement);
-
-    this._toast = document.getElementById(this._TOAST_ID);
+    this._container.appendChild(ToastElement);
+    this._toast = document.getElementById(TOAST_ID);
     this._closeBtn = this._toast.querySelector('.close-toast');
-    await this._createEvent();
-    this._toast.classList.add('show-toast');
 
+    await this._createEvent();
+    setTimeout(() => {
+      this._toast.classList.add('show-toast');
+    }, 5);
     setTimeout(() => {
       this._closeBtn.click();
-    }, 2000);
+    }, 2500);
   },
 
   async _createEvent() {
@@ -33,11 +34,10 @@ const ToastEvent = {
       if (event.keyCode === 27) {
         closeBtn.click();
       }
-    });
+    }, {once: true});
   },
 
   _hideAndRemove() {
-    this._closeBtn.removeEventListener('click', this._hideAndRemove);
     const thisToast = document.querySelectorAll('#toast-container toast-alert');
     if (thisToast[0]) {
       if (thisToast[0].classList.contains('show-toast')) {

@@ -11,7 +11,7 @@ class RestaurantCard extends HTMLElement {
     const restaurant = this._restaurant;
     this.classList.add('card');
     this.innerHTML =
-      `<img class="responsive" src="${CONFIG.BASE_IMAGE_URL}small/${restaurant.pictureId}" alt="${restaurant.name}, ${restaurant.city}">
+      `<img class="responsive" src="${CONFIG.BASE_IMAGE_URL}medium/${restaurant.pictureId}" alt="${restaurant.name}, ${restaurant.city}">
        <div class="card-panel">
         <div class="card-text">
           <p class="city"><i class="material-icons inherit mr1" aria-hidden="true">place</i>${restaurant.city}</p>
@@ -20,7 +20,7 @@ class RestaurantCard extends HTMLElement {
             <span>${this._getStarRating(restaurant.rating)}</span>
             <p>${restaurant.rating}/5</p>
           </div>
-          <p class="description">${restaurant.description.substring(0, 128)}</p>
+          <p class="description">${restaurant.description.substring(0, 72)}</p>
         </div>
         <div class="btn-group">
           <button tabindex="0" data-bookmark=${restaurant.id} aria-label="Add to bookmark" class="btn rounded-top-left icon right"><span class="material-icons" aria-hidden="true">bookmark_border</span></button>

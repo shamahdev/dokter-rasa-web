@@ -11,10 +11,13 @@ restaurant-detail
         .modal-category
             padding: 1rem 0
         .modal-menu
-            @include flex(row)
+            @include flex(column)
             padding: 1.5rem 0
             gap: 2.5rem
+            @include media-in(tablet)
+                @include flex(row)
             .food, .drink
+                width: 100%
                 p
                     padding: 0.5rem 0
                     border-bottom: 2px solid lighten(map-get($colors, "primary"), 50%)
@@ -32,7 +35,6 @@ restaurant-detail
         border-top-left-radius: 1.5rem
         transition: all 0.3s
         margin-top: auto
-        height: 3rem
         background-color: map-get($colors, "primary")
         &.collapse
             transition: all 0.3s

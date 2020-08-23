@@ -46,7 +46,8 @@ const Home = {
       const restaurantCatalogData = await RestaurantApiData.getCatalog();
       cardGroup.innerHTML = ``;
       await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
-    } catch (err) {
+    } catch (error) {
+      console.log(error);
       cardGroup.innerHTML =
       `<div class="msg-group">
         <p class="center mh-auto"><span class="material-icons mr1" aria-hidden="true">wifi_off</span>List Restoran tidak dapat di tampilkan. Periksa kembali internet anda :)</p>
