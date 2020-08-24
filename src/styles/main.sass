@@ -8,12 +8,14 @@
 @import core/helper
 
 // Components
-@import components/modal
+@import components/button
+@import components/skiptomain
+@import components/breadcrumb
 @import components/spinner
 @import components/toast
 @import components/navbar
 @import components/card
-@import components/button
+@import components/restaurant
 @import components/backtotop
 
 main
@@ -80,28 +82,15 @@ footer
     padding: 1.5rem
     background-color: map-get($colors, "primary")
 
-.skip-main 
-    background-color: map-get($colors, "dark")
-    color: #ffffff
-    position: fixed
-    width: 100%
-    padding: 0.75rem 1.5rem
-    z-index:1001
-    top: 0
-    transform: translateY(-100%)
-    transition: all .3s
-    @include teardrop(true, 2rem)
-    @include media-in("tablet")
-        width: auto
-    &:focus, &:active
-        transition: all .3s
-        transform: translateY(0%)
-
 .guide
     color: map-get($colors, "primary")
     font-size: 0.9rem
     text-transform: capitalize
     margin: 0.5rem 0
+a.guide
+    @extend .guide
+    &:hover, &:focus
+        text-decoration: underline
 .big-guide
     @extend .guide
     font-size: 1rem

@@ -2,8 +2,13 @@ import CONFIG from '@/global/config';
 import SlugParser from '@/routes/slugparser';
 
 class RestaurantCard extends HTMLElement {
+  set detailPage(page) {
+    this._detailPage = page;
+  }
+
   set restaurant(restaurant) {
     this._restaurant = restaurant;
+    this._detailPage = this._detailPage || 'restaurant';
     this._render();
   }
 
@@ -24,7 +29,7 @@ class RestaurantCard extends HTMLElement {
         </div>
         <div class="btn-group">
           <button tabindex="0" data-bookmark=${restaurant.id} aria-label="Add to bookmark" class="btn rounded-top-left icon right"><span class="material-icons" aria-hidden="true">bookmark_border</span></button>
-          <a tabindex="0" href="#/restaurant/${SlugParser.parseToSlug(restaurant.name)}" class="trigger btn primary side">Lihat detail</a>
+          <a tabindex="0" href="#/${this._detailPage}/${SlugParser.parseToSlug(restaurant.name)}" class="trigger btn primary side">Lihat detail</a>
         </div>
         </div>
       </div>`;

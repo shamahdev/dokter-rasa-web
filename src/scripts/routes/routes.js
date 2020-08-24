@@ -8,6 +8,7 @@ const Routes = {
   '/home': Home,
   '/bookmark': Bookmark,
   '/bookmark/:slug': Restaurant,
+  '/restaurant': Home,
   '/restaurant/:slug': Restaurant,
   '/404': NotFound,
 };

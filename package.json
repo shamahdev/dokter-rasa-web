@@ -6,6 +6,7 @@
   "scripts": {
     "start-dev": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
+    "lint": "npx eslint ./src",
     "test": "karma start"
   },
   "keywords": [],

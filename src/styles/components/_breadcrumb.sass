@@ -1,0 +1,15 @@
+ul.breadcrumb 
+    @include teardrop
+    background-color: #ffffff
+    padding: 0.5rem 1rem
+    list-style: none
+    margin-bottom: 1.5rem
+    li
+        display: inline
+        &::before
+            content: "/\00a0"
+            color: #000000
+            padding: 0.25rem
+            font-size: 0.9rem
+
+    

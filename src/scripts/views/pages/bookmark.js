@@ -19,8 +19,7 @@ const Bookmark = {
     const cardGroup = document.getElementById('card-group');
     if (restaurantCatalogData.length > 0) {
       cardGroup.innerHTML = ``;
-      await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
-      RestaurantCatalog.initModalFromBookmark();
+      await RestaurantCatalog.init(restaurantCatalogData, cardGroup, true /* Get Data from Bookmark: true */);
     } else {
       cardGroup.innerHTML =
       `<div class="msg-group">

@@ -1,6 +1,8 @@
+import App from '@/views/app';
+import UrlParser from '@/routes/urlparser';
+import ToastEvent from '@/utils/toast-event-init';
 import RestaurantBookmark from '@/data/restaurant-bookmark-idb';
 import RestaurantApiData from '@/data/restaurant-api-data';
-import ToastEvent from '@/utils/toast-event-init';
 
 const BookmarkEvent = {
   async init(bookmarkButton) {
@@ -50,7 +52,14 @@ const BookmarkEvent = {
     const removeEvent = async (event) => {
       event.stopPropagation();
       await RestaurantBookmark.deleteBookmark(bookmarkId);
-      this._createEvent(bookmarkButton);
+
+      const url = UrlParser.parseActiveUrlWithCombiner();
+      const page = url;
+      if (page.includes('/bookmark')) {
+        App.refreshPage();
+      } else {
+        this._createEvent(bookmarkButton);
+      }
     };
     bookmarkButton.addEventListener('click', removeEvent.bind(this), {once: true});
   },

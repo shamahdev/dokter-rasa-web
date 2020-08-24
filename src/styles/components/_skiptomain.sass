@@ -1,0 +1,17 @@
+skipto-main
+    cursor: pointer
+    background-color: map-get($colors, "dark")
+    color: #ffffff
+    position: fixed
+    width: 100%
+    padding: 0.75rem 1.5rem
+    z-index:1001
+    top: 0
+    transform: translateY(-100%)
+    transition: all .3s
+    @include teardrop(true, 2rem)
+    @include media-in("tablet")
+        width: auto
+    &:focus, &:active
+        transition: all .3s
+        transform: translateY(0%)

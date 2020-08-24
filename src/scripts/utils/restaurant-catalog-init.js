@@ -2,12 +2,16 @@ import '@/components/restaurant-card';
 import BookmarkEvent from '@/utils/bookmark-event-init';
 
 const RestaurantCatalog = {
-  init(restaurantCatalog, container) {
+  init(restaurantCatalog, container, getFromBookmark = false) {
     this._container = container;
-    this._catalog = restaurantCatalog;
+    this._getFromBookmark = getFromBookmark;
+    this._restaurantCatalog = restaurantCatalog;
 
-    this._catalog.forEach((restaurant) => {
+    this._restaurantCatalog.forEach((restaurant) => {
       const RestaurantCardElement = document.createElement('restaurant-card');
+      if (getFromBookmark) {
+        RestaurantCardElement.detailPage = 'bookmark';
+      }
       RestaurantCardElement.restaurant = restaurant;
       this._container.appendChild(RestaurantCardElement);
     });

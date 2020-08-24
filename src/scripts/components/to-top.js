@@ -17,14 +17,11 @@ class BackToTop extends HTMLElement {
         toTop.classList.remove('show-to-top');
       }
     };
-    this.addEventListener('click', this._backtoTop);
+    this.addEventListener('click', this._backtoTop.bind(this));
     document.addEventListener('keydown', (event) => {
       event.stopPropagation();
-      this._body = document.querySelector('body');
       if (event.keyCode === 84) {
-        if (!(this._body.classList.contains('opened-modal'))) {
-          this._focusFirstElement = document.querySelector('.skip-main');
-          this._focusFirstElement.focus();
+        if (!(document.activeElement.hasAttribute('required'))) {
           this._backtoTop(event);
         }
       }
@@ -35,6 +32,8 @@ class BackToTop extends HTMLElement {
     event.stopPropagation();
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
+    this._focusFirstElement = document.querySelector('skipto-main');
+    this._focusFirstElement.focus();
   }
 }
 customElements.define('to-top', BackToTop);
