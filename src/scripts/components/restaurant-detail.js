@@ -68,33 +68,33 @@ class RestaurantDetail extends HTMLElement {
       </div>
       <div class="restaurant-content" aria-label="${restaurant.name} Detail">
         <small class="guide">Press <b>B</b> to add to bookmark</small>
-        <h3 class="restaurant-title">${restaurant.name}</h3>
+        <h2 class="restaurant-title">${restaurant.name}</h2>
         <div class="star">
             <span>${this._getStarRating(restaurant.rating)}</span>
             <p>${restaurant.rating}/5</p>
         </div>
-        <a href="https://www.google.com/maps/search/${restaurant.address}" target="_blank" class="guide"><i class="material-icons inherit mr1" aria-hidden="true">place</i>${restaurant.address}, ${restaurant.city}</a>
+        <a href="https://www.google.com/maps/search/${restaurant.address}" rel="noreferrer" target="_blank" class="guide"><i class="material-icons inherit mr1" aria-hidden="true">place</i>${restaurant.address}, ${restaurant.city}</a>
         <p class="restaurant-description">${restaurant.description}.</p>
-        <h3 class="restaurant-title">Kategori</h3>
+        <h2 class="restaurant-title">Kategori</h2>
         <div class="restaurant-category"></div>
-        <h3 class="restaurant-title">Menu</h3>
+        <h2 class="restaurant-title">Menu</h2>
         <div class="restaurant-menu">
           <div class="food">
-            <p class="big-guide"><span class="material-icons mr1" aria-hidden="true">fastfood</span>Makanan</p>
+            <h3 class="big-guide"><span class="material-icons mr1" aria-hidden="true">fastfood</span>Makanan</h3>
           </div>
           <div class="drink">
-            <p class="big-guide"><span class="material-icons mr1" aria-hidden="true">emoji_food_beverage</span>Minuman</p>
+            <h3 class="big-guide"><span class="material-icons mr1" aria-hidden="true">emoji_food_beverage</span>Minuman</h3>
           </div>
         </div>
-        <h3 class="restaurant-title">Review Pengunjung</h3>
+        <h2 class="restaurant-title">Review Pengunjung</h2>
         <div class="restaurant-review"></div>
     </div>
     <div class="restaurant-form">
-    <h3 class="collabsible-title"><i class="material-icons mr1 ml2" aria-hidden="true">add_comment</i>Berikan Review</h3>
+    <h2 class="collabsible-title"><i class="material-icons mr1 ml2" aria-hidden="true">add_comment</i>Berikan Review</h2>
         <form id="review-form">
         <div class="form-input">
-            <input type="text" id="name" name="name" placeholder="Nama" required>
-            <textarea type="text" rows="1" id="review" name="review" placeholder="Tanggapan anda" required></textarea>
+            <input aria-label="Name" type="text" id="name" name="name" placeholder="Nama" required>
+            <textarea aria-label="Your review" type="text" rows="1" id="review" name="review" placeholder="Tanggapan anda" required></textarea>
         </div>
             <button id="submit-review" class="btn teardrop dark full" type="submit"><i class="material-icons mr1" aria-hidden="true">send</i>Kirim </button>
         </form>
