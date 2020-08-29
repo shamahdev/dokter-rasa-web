@@ -1,8 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const path = require('path');
 
 module.exports = {
@@ -15,21 +17,40 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.[contenthash].js',
+    filename: '[name].js',
   },
   module: {
     rules: [
       {
-        test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src/templates/index.html'),
       filename: 'index.html',
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
+    new ImageminWebpWebpackPlugin({
+      config: [
+        {
+          test: /\.(jpe?g|png)/,
+          options: {
+            quality: 50,
+          },
+        },
+      ],
+      overrideExtension: true,
     }),
     new CopyWebpackPlugin({
       patterns: [
@@ -48,14 +69,14 @@ module.exports = {
       start_url: '/index.html',
       display: 'standalone',
       crossorigin: 'use-credentials', // can be null, use-credentials or anonymous
-      ios: true,
       icons: [
         {
-          src: path.resolve(__dirname, 'src/public/images/icon.png'),
-          sizes: [96, 128, 192, 256, 384, 512],
+          src: path.resolve(__dirname, 'src/public/images/icons/icon.png'),
+          sizes: [96, 120, 128, 152, 167, 180, 192, 256, 384, 512, 1024],
           type: 'image/png',
           purpose: 'any maskable',
-          destination: 'images',
+          destination: path.join('images', 'icons'),
+          ios: true,
         },
       ],
     }),
@@ -63,5 +84,6 @@ module.exports = {
       swSrc: './src/scripts/sw.js',
       swDest: 'sw.js',
     }),
+    new BundleAnalyzerPlugin(),
   ],
 };

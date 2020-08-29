@@ -20,7 +20,7 @@ nav
         width: 220px
         height: 0vh
         transform: translate(-220px, 0)
-        transition: all .3s
+        transition: all 0.3s
         @include flex(column)
         z-index: 999
         @include media-in(tablet)
@@ -35,6 +35,9 @@ nav
         &.open
             height: 100vh
             transform: translate(0, 0)
+        &.open ~ .title
+            transition: all 0.3s
+            border-bottom-right-radius: 0 !important
         li
             @include flex
         a

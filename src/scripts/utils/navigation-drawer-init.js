@@ -7,8 +7,9 @@ const NavigationDrawer = {
     this._drawer = drawer;
     this._content = content;
     this._navigationLinks = this._drawer.querySelectorAll('a');
-    hamburger.addEventListener('click', this._toggleDrawer.bind(this));
-    content.addEventListener('click', this._closeDrawer.bind(this));
+
+    this._hamburger.addEventListener('click', this._toggleDrawer.bind(this));
+    this._content.addEventListener('click', this._closeDrawer.bind(this));
   },
 
   async _toggleDrawer(event) {
@@ -50,12 +51,18 @@ const NavigationDrawer = {
         drawer.setAttribute('aria-hidden', false);
         hamburger.setAttribute('aria-expanded', true);
         hamburger.innerHTML = 'close';
-        navigationLinks.forEach((element) => element.tabIndex = '0');
+        navigationLinks.forEach((element) => {
+          element.addEventListener('click', this._closeDrawer.bind(this));
+          element.tabIndex = '0';
+        });
       } else {
         drawer.setAttribute('aria-hidden', true);
         hamburger.setAttribute('aria-expanded', false);
         hamburger.innerHTML = 'menu';
-        navigationLinks.forEach((element) => element.tabIndex = '-1');
+        navigationLinks.forEach((element) => {
+          element.removeEventListener('click', this._closeDrawer.bind(this));
+          element.tabIndex = '-1';
+        });
       }
     } else {
       navigationLinks.forEach((element) => element.tabIndex = '0');

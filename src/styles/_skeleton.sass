@@ -1,0 +1,16 @@
+$skeleton: #cfcfcf
+
+.skeleton
+    *
+        &:focus
+            outline: 0 !important
+    p, a, h2, h3, span, small, button, footer, ul, form, .restaurant-menu, .review-container
+        transition: 0
+        border: 0 !important
+        pointer-events: none
+        user-select: none
+        color: $skeleton !important
+        background-color: $skeleton !important
+    li
+        &::before
+            @extend p

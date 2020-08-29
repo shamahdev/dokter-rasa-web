@@ -16,7 +16,7 @@ class RestaurantCard extends HTMLElement {
     const restaurant = this._restaurant;
     this.classList.add('card');
     this.innerHTML =
-      `<img class="responsive" src="${CONFIG.BASE_IMAGE_URL}small/${restaurant.pictureId}" alt="${restaurant.name}, ${restaurant.city}">
+      `<img class="responsive lazyload" src="./images/fallback.jpg" data-src="${CONFIG.BASE_IMAGE_URL}small/${restaurant.pictureId}" alt="${restaurant.name} in ${restaurant.city}">
        <div class="card-panel">
         <div class="card-text">
           <p class="city"><i class="material-icons inherit mr1" aria-hidden="true">place</i>${restaurant.city}</p>

@@ -5,7 +5,21 @@ const Home = {
   async render() {
     return `
         <div class="hero">
-            <img class="teardrop" src="./images/heros/dokterrasa_hero.jpg" alt="Dokter rasa">
+            <picture>
+              <source type="image/webp" 
+                   srcset="./images/heros/dokterrasa_hero-small.webp 480w, ./images/heros/dokterrasa_hero-large.webp 800w"
+                   sizes="(max-width: 600px) 480px, 800px"
+              >
+              <source type="image/jpeg" srcset="./images/heros/dokterrasa_hero.jpg"
+                   srcset="./images/heros/dokterrasa_hero-small.jpg 480w, ./images/heros/dokterrasa_hero-large.jpg 800w"
+                   sizes="(max-width: 600px) 480px, 800px"
+              >
+              <img class="teardrop lazyload" src="./images/fallback.jpg" data-src="./images/heros/dokterrasa_hero.jpg" 
+                   data-srcset="./images/heros/dokterrasa_hero-small.jpg 480w, ./images/heros/dokterrasa_hero-large.jpg 800w"
+                   sizes="(max-width: 600px) 480px, 800px"
+                   alt="Dokter rasa"
+              >
+            </picture>
             <div class="teardrop overlay">
                 <div class="content">
                     <p class="title">dokter rasa</p>

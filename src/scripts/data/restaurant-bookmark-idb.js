@@ -13,11 +13,11 @@ const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
 
 const RestaurantBookmark = {
   async getBookmark(restaurantId) {
-    console.log('%c Bookmark: Restaurant detail data is collected from IndexedDB.', 'background-color: green; color: white');
+    // console.log('%c Bookmark: Restaurant detail data is collected from IndexedDB.', 'background-color: green; color: white');
     return (await dbPromise).get(OBJECT_STORE_NAME, restaurantId);
   },
   async getAllBookmark() {
-    console.log('%c Bookmark: Restaurant catalog datas are collected from IndexedDB.', 'background-color: green; color: white');
+    // console.log('%c Bookmark: Restaurant catalog datas are collected from IndexedDB.', 'background-color: green; color: white');
     return (await dbPromise).getAll(OBJECT_STORE_NAME);
   },
   async putBookmark(restaurant) {

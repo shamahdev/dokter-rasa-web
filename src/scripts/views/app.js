@@ -1,3 +1,5 @@
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import '@/components/loading-spinner';
 import UrlParser from '@/routes/urlparser';
 import Routes from '@/routes/routes';
@@ -23,21 +25,22 @@ class App {
 
   async loadPage() {
     const url = UrlParser.parseActiveUrlWithCombiner();
-    if (!(url in Routes)) {
-      this._content.innerHTML = await this._load404();
-    }
     const page = await Routes[url];
-    this._content.innerHTML = await page.render();
-    await page.afterRender();
+    try {
+      this._content.innerHTML = await page.render();
+      await page.afterRender();
+    } catch (err) {
+      this._load404();
+    }
   }
 
   static async refreshPage() {
     const url = UrlParser.parseActiveUrlWithCombiner();
-    const page = Routes[url];
+    const page = await Routes[url];
     await page.afterRender();
   }
 
-  async _load404() {
+  _load404() {
     return `
         <article id="main">
             <h2 class="center">Halaman tidak ditemukan</h2>

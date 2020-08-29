@@ -7,13 +7,15 @@
     "start-dev": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "npx eslint ./src",
-    "test": "karma start"
+    "test": "karma start",
+    "image": "node sharp.js"
   },
   "keywords": [],
   "author": "Shaddam Amru Hasibuan <shaddam.a.h@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.10.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.10.4",
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -21,9 +23,9 @@
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.6.0",
     "eslint": "^7.7.0",
-    "eslint-config-airbnb": "^18.2.0",
     "eslint-config-google": "^0.14.0",
     "html-webpack-plugin": "^4.3.0",
+    "imagemin-webp-webpack-plugin": "^3.3.2",
     "jasmine-ajax": "^4.0.0",
     "jasmine-core": "^3.5.0",
     "karma": "^5.1.0",
@@ -32,10 +34,14 @@
     "karma-jasmine": "^3.3.1",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
+    "mini-css-extract-plugin": "^0.11.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
+    "sharp": "^0.26.0",
     "style-loader": "^1.2.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.44.0",
+    "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.0.9",
@@ -44,7 +50,9 @@
     "workbox-webpack-plugin": "^5.1.3"
   },
   "dependencies": {
+    "compression-webpack-plugin": "^5.0.1",
     "idb": "^5.0.4",
+    "lazysizes": "^5.2.2",
     "regenerator-runtime": "^0.13.5"
   }
 }

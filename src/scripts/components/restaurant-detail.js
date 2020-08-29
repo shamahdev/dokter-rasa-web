@@ -60,7 +60,10 @@ class RestaurantDetail extends HTMLElement {
     const restaurant = this._restaurant;
     this.innerHTML =
       `<div class="hero teardrop">
-          <img class="teardrop" src="${CONFIG.BASE_IMAGE_URL}medium/${restaurant.pictureId}" alt="${restaurant.name}">
+          <img class="teardrop lazyload" src="./images/fallback.jpg" data-src="${CONFIG.BASE_IMAGE_URL}medium/${restaurant.pictureId}" alt="${restaurant.name}"
+               srcset="${CONFIG.BASE_IMAGE_URL}small/${restaurant.pictureId} 480w, ${CONFIG.BASE_IMAGE_URL}medium/${restaurant.pictureId} 800w"
+               sizes="(max-width: 600px) 480px, 800px"
+          >
       </div>
       <div class="btn-group">
         <button tabindex="0" data-bookmark=${restaurant.id} aria-label="Add to bookmark" class="btn icon right"><span class="material-icons" aria-hidden="true">bookmark_border</span></button>
