@@ -120,4 +120,7 @@ dist
 .runtimeconfig.json
 .firebase/
 
+# E2E Testing output log #
+e2e/outputs
+
 # End of https://www.toptal.com/developers/gitignore/api/node
