@@ -9,7 +9,6 @@ class RestaurantApiData {
       const responseJson = await response.json();
       return responseJson.restaurants;
     } catch (err) {
-      console.log(err);
       return {};
     }
   }
@@ -19,7 +18,6 @@ class RestaurantApiData {
       const response = await fetch(API_ENDPOINT.DETAIL(id));
       return response.json();
     } catch (err) {
-      console.log(err);
       return {};
     }
   }

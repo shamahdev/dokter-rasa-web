@@ -1,12 +1,12 @@
 import App from '@/views/app';
 import UrlParser from '@/routes/urlparser';
-import ToastEvent from '@/utils/toast-event-init';
-import RestaurantBookmark from '@/data/restaurant-bookmark-idb';
-import RestaurantApiData from '@/data/restaurant-api-data';
+import ToastInitializer from '@/utils/toast-initializer';
 
-const BookmarkEvent = {
-  async init(bookmarkButton) {
+const BookmarkPresenter = {
+  async init(bookmarkButton, RestaurantBookmark, RestaurantApiData) {
     this._bookmarkButton = bookmarkButton;
+    this._RestaurantApiData = RestaurantApiData;
+    this._RestaurantBookmark = RestaurantBookmark;
     await this._createEvent();
   },
 
@@ -19,7 +19,7 @@ const BookmarkEvent = {
   },
 
   async _isRestaurantExist(bookmarkId) {
-    const restaurant = await RestaurantBookmark.getBookmark(bookmarkId);
+    const restaurant = await this._RestaurantBookmark.getBookmark(bookmarkId);
     return !!restaurant;
   },
 
@@ -30,28 +30,28 @@ const BookmarkEvent = {
 
     const addEvent = async (event) => {
       event.stopPropagation();
-      const restaurant = await RestaurantApiData.getRestaurantDetail(bookmarkId);
-      if (JSON.stringify(restaurant) === '{}') {
-        ToastEvent.init({
+      const restaurant = await this._RestaurantApiData.getRestaurantDetail(bookmarkId);
+      if (JSON.stringify(restaurant) === '{}' || restaurant.error) {
+        ToastInitializer.init({
           message: `Gagal ditambahkan ke bookmark, Periksa kembali internet anda.`,
           type: 'failed',
         });
       } else {
-        await RestaurantBookmark.putBookmark(restaurant.restaurant);
         this._createEvent(bookmarkButton);
       }
+      await this._RestaurantBookmark.putBookmark(restaurant.restaurant || {'id': bookmarkId, 'error': true});
     };
     bookmarkButton.addEventListener('click', addEvent.bind(this), {once: true});
   },
 
   _removeBookmark(bookmarkButton) {
     const bookmarkId = bookmarkButton.dataset.bookmark;
-    const bookmarkIcon = bookmarkButton.querySelector(`span`);
+    const bookmarkIcon = bookmarkButton.querySelector('span');
     bookmarkIcon.innerHTML = 'bookmark';
 
     const removeEvent = async (event) => {
       event.stopPropagation();
-      await RestaurantBookmark.deleteBookmark(bookmarkId);
+      await this._RestaurantBookmark.deleteBookmark(bookmarkId);
 
       const url = UrlParser.parseActiveUrlWithCombiner();
       const page = url;
@@ -66,4 +66,4 @@ const BookmarkEvent = {
 
 };
 
-export default BookmarkEvent;
+export default BookmarkPresenter;

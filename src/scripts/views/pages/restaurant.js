@@ -39,7 +39,7 @@ const Restaurant = {
         if (restaurant.name.toLowerCase() === title.toLowerCase()) {
           main.innerHTML = '';
           notFound = false;
-          RestaurantDetail.init(restaurant.id, main);
+          RestaurantDetail.init(restaurant.id, main, RestaurantBookmark, RestaurantApiData);
         }
       });
       if (notFound) {

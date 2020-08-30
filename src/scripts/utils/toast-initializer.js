@@ -1,11 +1,10 @@
-import '@/components/toast-alert';
+import '@/components/toast-message';
 
-const ToastEvent = {
-  _container: document.getElementById('toast-container'),
-
+const ToastInitializer = {
   async init({message, type = 'default'}) {
     const TOAST_ID = Math.random().toString(36).substring(5);
-    const ToastElement = document.createElement('toast-alert');
+    const ToastElement = document.createElement('toast-message');
+    this._container = document.getElementById('toast-container'),
 
     ToastElement.message = {
       id: TOAST_ID,
@@ -38,7 +37,7 @@ const ToastEvent = {
   },
 
   _hideAndRemove() {
-    const thisToast = document.querySelectorAll('#toast-container toast-alert');
+    const thisToast = document.querySelectorAll('#toast-container toast-message');
     if (thisToast[0]) {
       if (thisToast[0].classList.contains('show-toast')) {
         thisToast[0].className = thisToast[0].className.replace('show-toast', '');
@@ -51,4 +50,4 @@ const ToastEvent = {
 
 };
 
-export default ToastEvent;
+export default ToastInitializer;

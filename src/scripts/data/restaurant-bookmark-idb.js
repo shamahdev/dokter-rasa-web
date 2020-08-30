@@ -1,7 +1,7 @@
 import {openDB} from 'idb';
 import CONFIG from '@/global/config';
 import SlugParser from '@/routes/slugparser';
-import ToastEvent from '@/utils/toast-event-init';
+import ToastInitializer from '@/utils/toast-initializer';
 
 const {DATABASE_NAME, DATABASE_VERSION, OBJECT_STORE_NAME} = CONFIG;
 
@@ -14,6 +14,9 @@ const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
 const RestaurantBookmark = {
   async getBookmark(restaurantId) {
     // console.log('%c Bookmark: Restaurant detail data is collected from IndexedDB.', 'background-color: green; color: white');
+    if (!restaurantId) {
+      return;
+    }
     return (await dbPromise).get(OBJECT_STORE_NAME, restaurantId);
   },
   async getAllBookmark() {
@@ -21,14 +24,16 @@ const RestaurantBookmark = {
     return (await dbPromise).getAll(OBJECT_STORE_NAME);
   },
   async putBookmark(restaurant) {
-    ToastEvent.init({
-      message: `<a class="guide" href="#/restaurant/${SlugParser.parseToSlug(restaurant.name)}">${restaurant.name}</a> telah ditambahkan kedalam bookmark`,
-      type: 'success',
-    });
+    if (restaurant.name) {
+      ToastInitializer.init({
+        message: `<a class="guide" href="#/restaurant/${SlugParser.parseToSlug(restaurant.name)}">${restaurant.name}</a> telah ditambahkan kedalam bookmark`,
+        type: 'success',
+      });
+    }
     return (await dbPromise).put(OBJECT_STORE_NAME, restaurant);
   },
   async deleteBookmark(restaurantId) {
-    ToastEvent.init({
+    ToastInitializer.init({
       message: `Bookmark berhasil dihapus`,
       type: 'failed',
     });

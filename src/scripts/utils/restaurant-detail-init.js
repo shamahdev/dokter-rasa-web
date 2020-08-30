@@ -1,12 +1,13 @@
 import '@/components/restaurant-detail';
 import UrlParser from '@/routes/urlparser';
-import RestaurantApiData from '@/data/restaurant-api-data';
-import BookmarkEvent from '@/utils/bookmark-event-init';
+import BookmarkPresenter from '@/utils/bookmark-presenter';
 
 const RestaurantDetail = {
-  async init(restaurantId, container) {
+  async init(restaurantId, container, RestaurantBookmark, RestaurantApiData) {
     this._container = container;
     this._restaurantId = restaurantId;
+    this._RestaurantApiData = RestaurantApiData;
+    this._RestaurantBookmark = RestaurantBookmark;
 
     this._RestaurantDetailElement = document.createElement('restaurant-detail');
     await this._initRestaurantDetailElement();
@@ -26,7 +27,7 @@ const RestaurantDetail = {
 
   async _initRestaurantDetailElement() {
     const restaurantDetailElement = this._RestaurantDetailElement;
-    const restaurantData = await RestaurantApiData.getRestaurantDetail(this._restaurantId);
+    const restaurantData = await this._RestaurantApiData.getRestaurantDetail(this._restaurantId);
     if (JSON.stringify(restaurantData) === '{}') {
       const url = UrlParser.parseActiveUrlWithoutCombiner();
       this._container.innerHTML =
@@ -58,7 +59,7 @@ const RestaurantDetail = {
   async _createEvent() {
     const reviewShortcutButton = this._reviewShortcutButton;
     const bookmarkButton = this._bookmarkButton;
-    await BookmarkEvent.init(bookmarkButton);
+    await BookmarkPresenter.init(bookmarkButton, this._RestaurantBookmark, this._RestaurantApiData);
     this._initReviewForm();
 
     document.addEventListener('keyup', this._keyEvent.bind(this));
@@ -92,7 +93,7 @@ const RestaurantDetail = {
         review: reviewInput.value,
       };
 
-      const updatedReview = await RestaurantApiData.addReview(reviewData);
+      const updatedReview = await this._RestaurantApiData.addReview(reviewData);
       console.log(updatedReview);
       reviewForm.reset();
       this._resyncReview(updatedReview.customerReviews);

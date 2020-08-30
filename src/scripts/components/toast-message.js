@@ -1,4 +1,4 @@
-class ToastAlert extends HTMLElement {
+class ToastMessage extends HTMLElement {
   set message(message) {
     this._id = message.id;
     this._message = message.text;
@@ -17,4 +17,4 @@ class ToastAlert extends HTMLElement {
     </button>`;
   }
 }
-customElements.define('toast-alert', ToastAlert);
+customElements.define('toast-message', ToastMessage);
