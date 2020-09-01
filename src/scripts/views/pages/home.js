@@ -14,8 +14,8 @@ const Home = {
                    srcset="./images/heros/dokterrasa_hero-small.jpg 480w, ./images/heros/dokterrasa_hero-large.jpg 800w"
                    sizes="(max-width: 600px) 480px, 800px"
               >
-              <img class="teardrop lazyload" src="./images/fallback.jpg" data-src="./images/heros/dokterrasa_hero.jpg" 
-                   data-srcset="./images/heros/dokterrasa_hero-small.jpg 480w, ./images/heros/dokterrasa_hero-large.jpg 800w"
+              <img class="teardrop lazyload" src="./images/fallback.jpg" 
+                   srcset="./images/heros/dokterrasa_hero-small.jpg 480w, ./images/heros/dokterrasa_hero-large.jpg 800w"
                    sizes="(max-width: 600px) 480px, 800px"
                    alt="Dokter rasa"
               >
