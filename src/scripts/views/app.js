@@ -1,10 +1,17 @@
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
-import '@/components/loading-spinner';
 import UrlParser from '@/routes/urlparser';
 import Routes from '@/routes/routes';
 import NavigationDrawer from '@/utils/navigation-drawer-init';
 
+// Components
+import '@/components/toast-message';
+import '@/components/loading-spinner';
+import '@/components/skipto-main';
+import '@/components/to-top';
+import '@/components/navigation-drawer';
+import '@/components/restaurant-card';
+import '@/components/restaurant-detail';
 
 class App {
   constructor({hamburger, drawer, content}) {

@@ -1,12 +1,12 @@
-import App from '@/views/app';
 import UrlParser from '@/routes/urlparser';
-import ToastInitializer from '@/utils/toast-initializer';
+import Routes from '@/routes/routes';
 
 const BookmarkPresenter = {
-  async init(bookmarkButton, RestaurantBookmark, RestaurantApiData) {
+  async init(bookmarkButton, RestaurantBookmark, RestaurantApiData, ToastInitializer) {
     this._bookmarkButton = bookmarkButton;
     this._RestaurantApiData = RestaurantApiData;
     this._RestaurantBookmark = RestaurantBookmark;
+    this._ToastInitializer = ToastInitializer;
     await this._createEvent();
   },
 
@@ -32,12 +32,12 @@ const BookmarkPresenter = {
       event.stopPropagation();
       const restaurant = await this._RestaurantApiData.getRestaurantDetail(bookmarkId);
       if (JSON.stringify(restaurant) === '{}' || restaurant.error) {
-        ToastInitializer.init({
+        this._ToastInitializer.init({
           message: `Gagal ditambahkan ke bookmark, Periksa kembali internet anda.`,
           type: 'failed',
         });
       } else {
-        this._createEvent(bookmarkButton);
+        this._removeBookmark(bookmarkButton);
       }
       await this._RestaurantBookmark.putBookmark(restaurant.restaurant || {'id': bookmarkId, 'error': true});
     };
@@ -54,9 +54,9 @@ const BookmarkPresenter = {
       await this._RestaurantBookmark.deleteBookmark(bookmarkId);
 
       const url = UrlParser.parseActiveUrlWithCombiner();
-      const page = url;
-      if (page.includes('/bookmark')) {
-        App.refreshPage();
+      if (url.includes('/bookmark')) {
+        const page = await Routes[url];
+        await page.afterRender();
       } else {
         this._createEvent(bookmarkButton);
       }

@@ -1,5 +1,3 @@
-import '@/components/toast-message';
-
 const ToastInitializer = {
   async init({message, type = 'default'}) {
     const TOAST_ID = Math.random().toString(36).substring(5);
@@ -14,15 +12,17 @@ const ToastInitializer = {
 
     this._container.appendChild(ToastElement);
     this._toast = document.getElementById(TOAST_ID);
-    this._closeBtn = this._toast.querySelector('.close-toast');
 
-    await this._createEvent();
-    setTimeout(() => {
-      this._toast.classList.add('show-toast');
-    }, 5);
-    setTimeout(() => {
-      this._closeBtn.click();
-    }, 2500);
+    if (this._toast) {
+      this._closeBtn = this._toast.querySelector('.close-toast');
+      await this._createEvent();
+      setTimeout(() => {
+        this._toast.classList.add('show-toast');
+      }, 5);
+      setTimeout(() => {
+        this._closeBtn.click();
+      }, 2500);
+    }
   },
 
   async _createEvent() {

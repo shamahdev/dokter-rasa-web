@@ -1,6 +1,6 @@
-import '@/components/restaurant-detail';
 import UrlParser from '@/routes/urlparser';
 import BookmarkPresenter from '@/utils/bookmark-presenter';
+import ToastInitializer from '@/utils/toast-initializer';
 
 const RestaurantDetail = {
   async init(restaurantId, container, RestaurantBookmark, RestaurantApiData) {
@@ -8,6 +8,7 @@ const RestaurantDetail = {
     this._restaurantId = restaurantId;
     this._RestaurantApiData = RestaurantApiData;
     this._RestaurantBookmark = RestaurantBookmark;
+    this._ToastInitializer = ToastInitializer;
 
     this._RestaurantDetailElement = document.createElement('restaurant-detail');
     await this._initRestaurantDetailElement();
@@ -59,7 +60,7 @@ const RestaurantDetail = {
   async _createEvent() {
     const reviewShortcutButton = this._reviewShortcutButton;
     const bookmarkButton = this._bookmarkButton;
-    await BookmarkPresenter.init(bookmarkButton, this._RestaurantBookmark, this._RestaurantApiData);
+    await BookmarkPresenter.init(bookmarkButton, this._RestaurantBookmark, this._RestaurantApiData, this._ToastInitializer);
     this._initReviewForm();
 
     document.addEventListener('keyup', this._keyEvent.bind(this));

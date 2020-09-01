@@ -1,7 +1,7 @@
-import '@/components/restaurant-card';
 import BookmarkPresenter from '@/utils/bookmark-presenter';
 import RestaurantBookmark from '@/data/restaurant-bookmark-idb';
 import RestaurantApiData from '@/data/restaurant-api-data';
+import ToastInitializer from '@/utils/toast-initializer';
 
 const RestaurantCatalog = {
   init(restaurantCatalog, container, getFromBookmark = false) {
@@ -23,7 +23,7 @@ const RestaurantCatalog = {
   _initBookmarkEvent() {
     const bookmarkButton = this._container.querySelectorAll('button[data-bookmark]');
     bookmarkButton.forEach( async (button) => {
-      await BookmarkPresenter.init(button, RestaurantBookmark, RestaurantApiData);
+      await BookmarkPresenter.init(button, RestaurantBookmark, RestaurantApiData, ToastInitializer);
     });
   },
 };

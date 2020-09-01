@@ -7,7 +7,7 @@ Scenario('Scroll down and interact with Back to Top button', (I) => {
     I.dontSeeElement('to-top.show-to-top');
     I.scrollTo('footer');
 
-    I.waitForElement('to-top.show-to-top');
+    I.waitForElement('to-top.show-to-top', 3);
     I.click('to-top button');
 
     I.dontSeeElement('to-top.show-to-top');

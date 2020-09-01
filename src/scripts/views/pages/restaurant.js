@@ -27,7 +27,6 @@ const Restaurant = {
     const main = document.querySelector('.card-group');
     let notFound = true;
     const restaurantCatalogData = await this._getCatalogData(url.resource);
-    console.warn(restaurantCatalogData);
     if (JSON.stringify(restaurantCatalogData) === '{}') {
       main.innerHTML =
         `<div class="msg-group">

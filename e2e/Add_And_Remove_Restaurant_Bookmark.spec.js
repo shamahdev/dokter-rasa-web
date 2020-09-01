@@ -19,7 +19,7 @@ Scenario('Add and remove one bookmark', async (I) => {
     I.see('bookmark', 'button[data-bookmark] span');
     I.amOnPage('/#/bookmark');
 
-    I.waitForElement('restaurant-card');
+    I.waitForElement('restaurant-card', 3);
     const bookmarkedRestaurantCard = locate('.card-text h3').first();
     const bookmarkedRestaurantName = await I.grabTextFrom(bookmarkedRestaurantCard);
    
@@ -28,7 +28,7 @@ Scenario('Add and remove one bookmark', async (I) => {
     I.see('Lihat detail', 'a.trigger')
     I.click(locate('a.trigger').first());
 
-    I.waitForElement('restaurant-detail');
+    I.waitForElement('restaurant-detail', 3);
     I.pressKey('B'); /* Press bookmark button with accessibility key */
 
     I.dontSeeElement('button[data-bookmark]');

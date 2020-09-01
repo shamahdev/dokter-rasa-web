@@ -1,4 +1,4 @@
-import * as TestFactories from '../specs/helpers/testFactories';
+import * as TestFactories from './helpers/testFactories';
 import RestaurantBookmark from '@/data/restaurant-bookmark-idb';
 
 describe('Removing a bookmark', () => {
@@ -11,33 +11,39 @@ describe('Removing a bookmark', () => {
     };
 
     beforeEach( async () => {
-        addBookmarkButton();
-        bookmarkButton = document.querySelector('button[data-bookmark="DUMMY_DATA"]');
         const DUMMY_DATA = { 'id': 'DUMMY_DATA', 'error': true }
         await RestaurantBookmark.putBookmark(DUMMY_DATA);
+        addBookmarkButton();
+        bookmarkButton = document.querySelector('button[data-bookmark="DUMMY_DATA"]');
     });
 
-    it(`should show the bold bookmark (bookmarked) icon when the restaurant hasn been bookmarked`, async () => {
+    fit(`should show the bold bookmark (bookmarked) icon when the restaurant hasn been bookmarked`, async () => {
         await TestFactories.initializeBookmarkButton(bookmarkButton);
         const bookmarkIcon = bookmarkButton.querySelector('span');
-        expect(bookmarkIcon.innerHTML === 'bookmark')
-            .toBeTruthy();
+        setTimeout(() => {
+            expect(bookmarkIcon.innerHTML === 'bookmark')
+                .toBeTruthy();
+        }, 200);
     });
 
-    it(`shouldn't show the outline bookmark (not bookmarked) icon when the restaurant hasn't been bookmarked`, async () => {
+    fit(`shouldn't show the outline bookmark (not bookmarked) icon when the restaurant hasn't been bookmarked`, async () => {
         await TestFactories.initializeBookmarkButton(bookmarkButton);
         const bookmarkIcon = bookmarkButton.querySelector('span');
-        expect(bookmarkIcon.innerHTML === 'bookmarked')
-            .toBeFalsy();
+        setTimeout(() => {
+            expect(bookmarkIcon.innerHTML === 'bookmarked')
+                .toBeFalsy();
+        }, 200);
     });
 
-    it('should be able to remove bookmark from the list', async () => {
+    fit('should be able to remove bookmark from the list', async () => {
         await TestFactories.initializeBookmarkButton(bookmarkButton);
         bookmarkButton.dispatchEvent(new Event('click'));
-        expect(await RestaurantBookmark.getAllBookmark()).toEqual([]);
+        setTimeout( async () => {
+            expect(await RestaurantBookmark.getAllBookmark()).toEqual([]);
+        }, 100);
     });
     
-    it(`shouldn't throw error if removed bookmark isn't in the list`, async () => {
+    fit(`shouldn't throw error if removed bookmark isn't in the list`, async () => {
         await TestFactories.initializeBookmarkButton(bookmarkButton);
         bookmarkButton.dispatchEvent(new Event('click'));
         await RestaurantBookmark.deleteBookmark('DUMMY_DATA');

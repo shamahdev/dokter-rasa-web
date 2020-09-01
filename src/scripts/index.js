@@ -2,9 +2,6 @@ import 'styles/main.sass';
 import 'regenerator-runtime';
 import App from '@/views/app.js';
 import swRegister from '@/utils/sw-register';
-import '@/components/navigation-drawer';
-import '@/components/skipto-main';
-import '@/components/to-top';
 
 const app = new App({
   hamburger: document.querySelector('#hamburger'),
