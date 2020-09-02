@@ -7,19 +7,16 @@ const Home = {
         <div class="hero">
             <picture>
               <source type="image/webp" 
-                   srcset="./images/heros/dokterrasa_hero-small.webp 480w, ./images/heros/dokterrasa_hero-large.webp 800w"
-                   sizes="(max-width: 600px) 480px, 800px"
-              >
-              <source type="image/jpeg" srcset="./images/heros/dokterrasa_hero.jpg"
-                   srcset="./images/heros/dokterrasa_hero-small.jpg 480w, ./images/heros/dokterrasa_hero-large.jpg 800w"
-                   sizes="(max-width: 600px) 480px, 800px"
-              >
+                      srcset="./images/heros/dokterrasa_hero-small.webp"
+                      media="(max-width: 600px)">
+              <source type="image/webp"
+                      srcset="./images/heros/dokterrasa_hero-large.webp"
+                      media="(min-wdith: 601px)">
               <img class="teardrop lazyload" src="./images/fallback.jpg" 
-                   srcset="./images/heros/dokterrasa_hero-small.jpg 480w, ./images/heros/dokterrasa_hero-large.jpg 800w"
-                   sizes="(max-width: 600px) 480px, 800px"
-                   alt="Dokter rasa"
-              >
-            </picture>
+                  srcset="./images/heros/dokterrasa_hero-small.jpg 480w, ./images/heros/dokterrasa_hero-large.jpg 800w"
+                  sizes="(max-width: 600px) 480px, 800px"
+                  alt="Dokter rasa">
+          </picture>
             <div class="teardrop overlay">
                 <div class="content">
                     <p class="title">dokter rasa</p>
