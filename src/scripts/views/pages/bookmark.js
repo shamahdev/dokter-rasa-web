@@ -1,5 +1,5 @@
-import RestaurantBookmark from '@/data/restaurant-bookmark-idb';
-import RestaurantCatalog from '@/utils/restaurant-catalog-init';
+import RestaurantBookmark from '@/data/restaurant-bookmark-idb'
+import RestaurantCatalog from '@/utils/restaurant-catalog-init'
 
 const Bookmark = {
   async render() {
@@ -11,23 +11,23 @@ const Bookmark = {
               <loading-spinner></loading-spinner>
             </div>
         </article>
-      `;
+      `
   },
 
   async afterRender() {
-    const restaurantCatalogData = await RestaurantBookmark.getAllBookmark();
-    const cardGroup = document.getElementById('card-group');
+    const restaurantCatalogData = await RestaurantBookmark.getAllBookmark()
+    const cardGroup = document.getElementById('card-group')
     if (restaurantCatalogData.length > 0) {
-      cardGroup.innerHTML = ``;
-      await RestaurantCatalog.init(restaurantCatalogData, cardGroup, true /* Get Data from Bookmark: true */);
+      cardGroup.innerHTML = ``
+      await RestaurantCatalog.init(restaurantCatalogData, cardGroup, true /* Get Data from Bookmark: true */)
     } else {
       cardGroup.innerHTML =
       `<div class="msg-group">
         <p class="center mh-auto"><span class="material-icons mr1" aria-hidden="true">not_interested</span>Belum ada restoran yang ditambahkan ke bookmark</p>
         <a tabindex="0" href="#/home" class="btn primary rounded center mh-auto">Cari Restoran</a>
-      </div>`;
+      </div>`
     }
   },
-};
+}
 
-export default Bookmark;
+export default Bookmark

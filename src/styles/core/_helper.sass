@@ -30,6 +30,9 @@ button
   &:hover
     cursor: pointer
 
+input
+  min-height: 44px
+
 //Helpers
 *
   &:focus
@@ -47,9 +50,9 @@ button
 .center
   text-align: center
 .rounded
-  border-radius: 2.5rem
+  border-radius: 0.5rem
 .rounded-top-left
-  border-top-left-radius: 1.5rem
+  border-top-left-radius: 0.5rem
 
 .mh-auto
   margin: 0 auto
@@ -120,8 +123,8 @@ footer
     background-color: map-get($colors, "primary")
 
 .guide
+    min-height: 44px
     color: map-get($colors, "primary")
-    font-size: 0.9rem
     text-transform: capitalize
     margin: 0.5rem 0
 a.guide

@@ -10,11 +10,11 @@ const NotFound = {
                 </div>
             </div>
         </article>
-      `;
+      `
   },
   async afterRender() {
-    console.warn('Halaman yang anda cari tidak ditemukan.');
+    console.warn('Halaman yang anda cari tidak ditemukan.')
   },
-};
+}
 
-export default NotFound;
+export default NotFound

@@ -1,19 +1,19 @@
-import 'regenerator-runtime';
-import {setCacheNameDetails, skipWaiting, clientsClaim} from 'workbox-core';
-import {precacheAndRoute} from 'workbox-precaching';
-import {registerRoute} from 'workbox-routing';
-import {CacheFirst, StaleWhileRevalidate} from 'workbox-strategies';
-import {CacheableResponsePlugin} from 'workbox-cacheable-response';
-import {ExpirationPlugin} from 'workbox-expiration';
-import CONFIG from '@/global/config';
+import 'regenerator-runtime'
+import {setCacheNameDetails, skipWaiting, clientsClaim} from 'workbox-core'
+import {precacheAndRoute} from 'workbox-precaching'
+import {registerRoute} from 'workbox-routing'
+import {CacheFirst, StaleWhileRevalidate} from 'workbox-strategies'
+import {CacheableResponsePlugin} from 'workbox-cacheable-response'
+import {ExpirationPlugin} from 'workbox-expiration'
+import CONFIG from '@/global/config'
 
-skipWaiting();
-clientsClaim();
+skipWaiting()
+clientsClaim()
 
-setCacheNameDetails(CONFIG.CACHE_NAME);
+setCacheNameDetails(CONFIG.CACHE_NAME)
 precacheAndRoute(self.__WB_MANIFEST, {
   ignoreUrlParametersMatching: [/.*/],
-});
+})
 
 registerRoute(
     ({url}) => url.origin,
@@ -24,7 +24,7 @@ registerRoute(
         }),
       ],
     }),
-);
+)
 
 registerRoute(
     ({request}) => request.destination === 'image',
@@ -37,14 +37,14 @@ registerRoute(
         }),
       ],
     }),
-);
+)
 
 registerRoute(
     ({url}) => url.origin === 'https://fonts.googleapis.com',
     new StaleWhileRevalidate({
       cacheName: 'google-fonts-stylesheets',
     }),
-);
+)
 
 registerRoute(
     ({url}) => url.origin === 'https://fonts.gstatic.com',
@@ -60,12 +60,12 @@ registerRoute(
         }),
       ],
     }),
-);
+)
 
 self.addEventListener('push', (event) => {
-  const title = 'Dokter Rasa Push Notification';
+  const title = 'Dokter Rasa Push Notification'
   const options = {
     body: event.data.text(),
-  };
-  event.waitUntil(self.registration.showNotification(title, options));
-});
+  }
+  event.waitUntil(self.registration.showNotification(title, options))
+})

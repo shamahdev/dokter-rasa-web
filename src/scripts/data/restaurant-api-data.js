@@ -1,24 +1,24 @@
 /* eslint-disable new-cap */
-import API_ENDPOINT from '@/global/endpoint';
-import CONFIG from '@/global/config';
+import API_ENDPOINT from '@/global/endpoint'
+import CONFIG from '@/global/config'
 
 class RestaurantApiData {
   static async getCatalog() {
     try {
-      const response = await fetch(API_ENDPOINT.LIST);
-      const responseJson = await response.json();
-      return responseJson.restaurants;
+      const response = await fetch(API_ENDPOINT.LIST)
+      const responseJson = await response.json()
+      return responseJson.restaurants
     } catch (err) {
-      return {};
+      return {}
     }
   }
 
   static async getRestaurantDetail(id) {
     try {
-      const response = await fetch(API_ENDPOINT.DETAIL(id));
-      return response.json();
+      const response = await fetch(API_ENDPOINT.DETAIL(id))
+      return response.json()
     } catch (err) {
-      return {};
+      return {}
     }
   }
 
@@ -30,9 +30,9 @@ class RestaurantApiData {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(review),
-    });
-    return response.json();
+    })
+    return response.json()
   }
 }
 
-export default RestaurantApiData;
+export default RestaurantApiData

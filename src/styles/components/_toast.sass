@@ -1,30 +1,29 @@
 #toast-container
     position: fixed
     bottom: auto
-    top: 0
-    left: 50%
+    top: 70px
+    left: 100%
     z-index: 1003
     width: 100%
     @include flex(column)
     
 .toast
     transition: all .3s
-    transform: translate(-50%, -100%)
+    transform: translate(0%, 0)
     @include flex(row)
-    width: 100%
-    &:last-child
-        border-bottom-left-radius: 2.5rem
+    width: fit-content
+    border-radius: 0.5rem
+    margin-bottom: 1rem
     @each $name, $color in $colors
         &.#{$name}
             background-color: $color
     p
-        text-align: center
-        width: 100%
+        width: fit-content
         padding: 1rem
     &.show-toast 
         visibility: visible
         transition: all .3s
-        transform: translate(-50%, 0%)
+        transform: translate(-100%, 0)
     &.failed
         p
             color: #ffffff

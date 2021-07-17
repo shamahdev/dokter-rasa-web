@@ -1,20 +1,20 @@
-import CONFIG from '@/global/config';
-import SlugParser from '@/routes/slugparser';
+import CONFIG from '@/global/config'
+import SlugParser from '@/routes/slugparser'
 
 class RestaurantCard extends HTMLElement {
   set detailPage(page) {
-    this._detailPage = page;
+    this._detailPage = page
   }
 
   set restaurant(restaurant) {
-    this._restaurant = restaurant;
-    this._detailPage = this._detailPage || 'restaurant';
-    this._render();
+    this._restaurant = restaurant
+    this._detailPage = this._detailPage || 'restaurant'
+    this._render()
   }
 
   _render() {
-    const restaurant = this._restaurant;
-    this.classList.add('card');
+    const restaurant = this._restaurant
+    this.classList.add('card')
     this.innerHTML =
       `<img class="responsive lazyload" src="./images/fallback.jpg" data-src="${CONFIG.BASE_IMAGE_URL}small/${restaurant.pictureId}" alt="${restaurant.name} in ${restaurant.city}">
        <div class="card-panel">
@@ -32,19 +32,19 @@ class RestaurantCard extends HTMLElement {
           <a tabindex="0" href="#/${this._detailPage}/${SlugParser.parseToSlug(restaurant.name)}" class="trigger btn primary side">Lihat detail</a>
         </div>
         </div>
-      </div>`;
+      </div>`
   }
 
   _getStarRating(rating) {
-    let stars = ``;
+    let stars = ``
     for (let i = 0; i < parseFloat(rating); i++) {
       if ((parseFloat(rating)) > i && i === (parseInt(rating))) {
-        stars += `<i class="material-icons" aria-hidden="true">star_half</i>`;
+        stars += `<i class="material-icons" aria-hidden="true">star_half</i>`
       } else {
-        stars += `<i class="material-icons" aria-hidden="true">star</i>`;
+        stars += `<i class="material-icons" aria-hidden="true">star</i>`
       }
     }
-    return stars;
+    return stars
   }
 }
-customElements.define('restaurant-card', RestaurantCard);
+customElements.define('restaurant-card', RestaurantCard)

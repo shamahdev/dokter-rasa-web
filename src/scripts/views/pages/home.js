@@ -1,5 +1,5 @@
-import RestaurantApiData from '@/data/restaurant-api-data';
-import RestaurantCatalog from '@/utils/restaurant-catalog-init';
+import RestaurantApiData from '@/data/restaurant-api-data'
+import RestaurantCatalog from '@/utils/restaurant-catalog-init'
 
 const Home = {
   async render() {
@@ -48,24 +48,24 @@ const Home = {
               <loading-spinner></loading-spinner>
             </div>
         </article>
-      `;
+      `
   },
 
   async afterRender() {
-    const cardGroup = document.getElementById('card-group');
+    const cardGroup = document.getElementById('card-group')
     try {
-      const restaurantCatalogData = await RestaurantApiData.getCatalog();
-      cardGroup.innerHTML = ``;
-      await RestaurantCatalog.init(restaurantCatalogData, cardGroup);
+      const restaurantCatalogData = await RestaurantApiData.getCatalog()
+      cardGroup.innerHTML = ``
+      await RestaurantCatalog.init(restaurantCatalogData, cardGroup)
     } catch (error) {
-      console.log(error);
+      console.log(error)
       cardGroup.innerHTML =
       `<div class="msg-group">
         <p class="center mh-auto"><span class="material-icons mr1" aria-hidden="true">wifi_off</span>List Restoran tidak dapat di tampilkan. Periksa kembali internet anda :)</p>
         <a tabindex="0" href="#/home" class="btn primary rounded center mh-auto">Refresh</a>
-      </div>`;
+      </div>`
     }
   },
-};
+}
 
-export default Home;
+export default Home

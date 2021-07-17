@@ -1,25 +1,25 @@
-import 'lazysizes';
-import 'lazysizes/plugins/parent-fit/ls.parent-fit';
-import UrlParser from '@/routes/urlparser';
-import Routes from '@/routes/routes';
-import NavigationDrawer from '@/utils/navigation-drawer-init';
+import 'lazysizes'
+import 'lazysizes/plugins/parent-fit/ls.parent-fit'
+import UrlParser from '@/routes/urlparser'
+import Routes from '@/routes/routes'
+import NavigationDrawer from '@/utils/navigation-drawer-init'
 
 // Components
-import '@/components/toast-message';
-import '@/components/loading-spinner';
-import '@/components/skipto-main';
-import '@/components/to-top';
-import '@/components/navigation-drawer';
-import '@/components/restaurant-card';
-import '@/components/restaurant-detail';
+import '@/components/toast-message'
+import '@/components/loading-spinner'
+import '@/components/skipto-main'
+import '@/components/to-top'
+import '@/components/navigation-drawer'
+import '@/components/restaurant-card'
+import '@/components/restaurant-detail'
 
 class App {
   constructor({hamburger, drawer, content}) {
-    this._hamburger = hamburger;
-    this._drawer = drawer;
-    this._content = content;
+    this._hamburger = hamburger
+    this._drawer = drawer
+    this._content = content
 
-    this._initialAppShell();
+    this._initialAppShell()
   }
 
   _initialAppShell() {
@@ -27,24 +27,24 @@ class App {
       hamburger: this._hamburger,
       drawer: this._drawer,
       content: this._content,
-    });
+    })
   }
 
   async loadPage() {
-    const url = UrlParser.parseActiveUrlWithCombiner();
-    const page = await Routes[url];
+    const url = UrlParser.parseActiveUrlWithCombiner()
+    const page = await Routes[url]
     try {
-      this._content.innerHTML = await page.render();
-      await page.afterRender();
+      this._content.innerHTML = await page.render()
+      await page.afterRender()
     } catch (err) {
-      this._load404();
+      this._load404()
     }
   }
 
   static async refreshPage() {
-    const url = UrlParser.parseActiveUrlWithCombiner();
-    const page = await Routes[url];
-    await page.afterRender();
+    const url = UrlParser.parseActiveUrlWithCombiner()
+    const page = await Routes[url]
+    await page.afterRender()
   }
 
   _load404() {
@@ -58,8 +58,8 @@ class App {
                 </div>
             </div>
         </article>
-      `;
+      `
   }
 }
 
-export default App;
+export default App

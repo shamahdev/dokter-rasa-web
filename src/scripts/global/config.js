@@ -10,6 +10,6 @@ const CONFIG = {
   DATABASE_NAME: 'dokterrasa-restaurant-db',
   DATABASE_VERSION: 1,
   OBJECT_STORE_NAME: 'bookmark',
-};
+}
 
-export default CONFIG;
+export default CONFIG

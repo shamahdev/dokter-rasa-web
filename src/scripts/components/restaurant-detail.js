@@ -1,63 +1,63 @@
-import CONFIG from '@/global/config';
+import CONFIG from '@/global/config'
 class RestaurantDetail extends HTMLElement {
   set restaurant(restaurant) {
-    this._restaurant = restaurant;
-    this._restaurantReviews = this._restaurant.consumerReviews;
-    this._restaurantCategories = this._restaurant.categories;
-    this._restaurantMenu = this._restaurant.menus;
-    this._render();
+    this._restaurant = restaurant
+    this._restaurantReviews = this._restaurant.customerReviews
+    this._restaurantCategories = this._restaurant.categories
+    this._restaurantMenu = this._restaurant.menus
+    this._render()
   }
 
   set reviews(reviews) {
-    this._restaurantReviews = reviews;
+    this._restaurantReviews = reviews
   }
 
   get foods() {
-    const foodList = this._restaurantMenu.foods;
-    let foodListHtml = ``;
+    const foodList = this._restaurantMenu.foods
+    let foodListHtml = ``
     foodList.forEach((food) => {
       foodListHtml +=
-          `<p>${food.name}</p>`;
-    });
-    return foodListHtml;
+          `<p>${food.name}</p>`
+    })
+    return foodListHtml
   }
 
   get drinks() {
-    const drinkList = this._restaurantMenu.drinks;
-    let drinkListHtml = ``;
+    const drinkList = this._restaurantMenu.drinks
+    let drinkListHtml = ``
     drinkList.forEach((drink) => {
       drinkListHtml +=
-          `<p>${drink.name}</p>`;
-    });
-    return drinkListHtml;
+          `<p>${drink.name}</p>`
+    })
+    return drinkListHtml
   }
 
   get categories() {
-    const restaurantCategories = this._restaurantCategories;
-    let categoryListHtml = ``;
+    const restaurantCategories = this._restaurantCategories
+    let categoryListHtml = ``
     restaurantCategories.forEach((category) => {
       categoryListHtml +=
-          `<p class="capsule">${category.name}</p>`;
-    });
-    return categoryListHtml;
+          `<p class="capsule">${category.name}</p>`
+    })
+    return categoryListHtml
   }
 
   get reviewList() {
-    const restaurantReviews = this._restaurantReviews;
-    let reviewListHtml = ``;
+    const restaurantReviews = this._restaurantReviews
+    let reviewListHtml = ``
     restaurantReviews.forEach((review) => {
       reviewListHtml +=
           `<div class="review-container" id="123">
               <p class="name">${review.name}</p>
               <p class="review">${review.review}</p>
               <small class="guide"><i class="material-icons inherit mr1" aria-hidden="true">access_time</i>${review.date}</small>
-          </div>`;
-    });
-    return reviewListHtml;
+          </div>`
+    })
+    return reviewListHtml
   }
 
   async _render() {
-    const restaurant = this._restaurant;
+    const restaurant = this._restaurant
     this.innerHTML =
       `<div class="hero teardrop">
           <img class="teardrop lazyload" src="./images/fallback.jpg" data-src="${CONFIG.BASE_IMAGE_URL}medium/${restaurant.pictureId}" alt="${restaurant.name}"
@@ -67,7 +67,7 @@ class RestaurantDetail extends HTMLElement {
       </div>
       <div class="btn-group">
         <button tabindex="0" data-bookmark=${restaurant.id} aria-label="Add to bookmark" class="btn icon right"><span class="material-icons" aria-hidden="true">bookmark_border</span></button>
-        <button tabindex="0" id="review-shortcut" aria-label="Add Review" class="btn primary icon"><span class="material-icons mr1" aria-hidden="true">comment</span>${restaurant.consumerReviews.length}</button>
+        <button tabindex="0" id="review-shortcut" aria-label="Add Review" class="btn primary icon"><span class="material-icons mr1" aria-hidden="true">comment</span>${restaurant.customerReviews.length}</button>
       </div>
       <div class="restaurant-content" aria-label="${restaurant.name} Detail">
         <small class="guide">Press <b>B</b> to add to bookmark</small>
@@ -102,19 +102,19 @@ class RestaurantDetail extends HTMLElement {
             <button id="submit-review" class="btn teardrop dark full" type="submit"><i class="material-icons mr1" aria-hidden="true">send</i>Kirim </button>
         </form>
     </div>
-      `;
+      `
   }
 
   _getStarRating(rating) {
-    let stars = ``;
+    let stars = ``
     for (let i = 0; i < parseFloat(rating); i++) {
       if ((parseFloat(rating)) > i && i === (parseInt(rating))) {
-        stars += `<i class="material-icons" aria-hidden="true">star_half</i>`;
+        stars += `<i class="material-icons" aria-hidden="true">star_half</i>`
       } else {
-        stars += `<i class="material-icons" aria-hidden="true">star</i>`;
+        stars += `<i class="material-icons" aria-hidden="true">star</i>`
       }
     }
-    return stars;
+    return stars
   }
 }
-customElements.define('restaurant-detail', RestaurantDetail);
+customElements.define('restaurant-detail', RestaurantDetail)
