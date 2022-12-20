@@ -14,7 +14,7 @@ class NavigationDrawer extends HTMLElement {
                 <ul id="drawer" class="links">
                     <li><a tabindex="0" href="#/home"><span class="material-icons" aria-hidden="true">home</span> Home</a></li>
                     <li><a tabindex="0" href="#/bookmark"><span class="material-icons" aria-hidden="true">book</span> Bookmark</a></li>
-                    <li><a tabindex="0" href="https://github.com/shamahdotdev" rel="noreferrer" target="_blank"><span class="material-icons" aria-hidden="true">person</span> About Us</a></li>
+                    <li><a tabindex="0" href="https://github.com/shamahdev" rel="noreferrer" target="_blank"><span class="material-icons" aria-hidden="true">person</span> About Us</a></li>
                 </ul>
             </nav>`
   }
