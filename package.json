@@ -50,7 +50,7 @@
     "workbox-webpack-plugin": "^5.1.3"
   },
   "dependencies": {
-    "codeceptjs": "^2.6.10",
+    "codeceptjs": "^3.3.7",
     "compression-webpack-plugin": "^5.0.1",
     "idb": "^5.0.4",
     "lazysizes": "^5.2.2",
