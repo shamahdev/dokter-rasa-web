@@ -10005,7 +10005,7 @@ webpack-merge@^5.0.9:
     clone-deep "^4.0.1"
     wildcard "^2.0.0"
 
-webpack-pwa-manifest@^4.2.0:
+webpack-pwa-manifest@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/webpack-pwa-manifest/-/webpack-pwa-manifest-4.3.0.tgz#a9382f3e280ba4f74b6e855c529bcb550461ab5e"
   integrity sha512-3hK8Qg58SyLCUIz4PBYnfUPM6iJ5K88h8Uhc3MxmlJcVtDF/11aBBdUTdQkqc9bo6Cb8Q1v2xdsB2XO6pzTbiA==
